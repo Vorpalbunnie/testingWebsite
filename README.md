@@ -45,6 +45,7 @@ Add the "x"s to each task/component you've completed:
 - [ ] Tested the auto-close feature.
 - [ ] Tested the ability to enable/disable the auto-close feature.
 - [ ] Tested the auto-off feature of the light.
+- [ ] Reviewed the demo videos and match the basic behaviors shown.
 - [ ] Verified that any change in state will be reflected in the UI.
 - [ ] Completed the `README.md` :smile:
 - [ ] Committed your code and pushed it to GitHub
