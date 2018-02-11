@@ -1,0 +1,208 @@
+/* Based on and using code examples from:
+    https://www.w3schools.com/css/css_rwd_grid.asp
+and
+    https://www.w3schools.com/howto/howto_css_equal_height.asp
+*/
+
+* {
+  box-sizing: border-box;
+}
+html {
+  font-family: "Lucida Sans", sans-serif;
+  text-align: center;
+}
+div{
+  max-height:100%;
+}
+html, body {
+  width: 100%;
+
+  margin:0;
+  padding:0;
+}
+
+br{
+  line-height: 100%;
+}
+table{
+  font-size: 12pt;
+}
+
+/*Dividing up the HTML screens:) */
+.header {
+    background-color: #9933cc;
+    color: #ffffff;
+    padding: 15px;
+    margin: 0px;
+    width: auto;
+}
+.boxborder {
+    border: 1px solid black;
+}
+
+#mobileViewer{
+  font-size: 3.5vw;
+}
+
+.full-width {
+  width:100%;
+}
+
+/*Screen Parameters!*/
+#settings{
+  /*Fixes a mobile bug*/
+  font-size: 3.5vw;
+}
+
+#login, #newInfo{
+  padding: 5%;
+  font-size: 18pt;
+}
+
+#GarageInfo{
+  font-size: 18pt;
+}
+
+.link{
+  text-decoration: underline;
+  color: white;
+}
+
+
+/* Link Styling: https://stackoverflow.com/questions/2906582/how-to-create-an-html-button-that-acts-like-a-link*/
+a.button {
+    text-decoration: none;
+    color: initial;
+}
+
+/*Table of AUTHORIZED USERS*/
+/*AKA so you can give your buddy temporary access, as
+mentioned in the original prompt*/
+#Authorized{
+  display: block;
+  max-width: 100%;
+  border: 10px solid transparent;
+  text-align: left;
+  background-color: darkred;
+  color: white;
+}
+td{
+    border:1px solid #000;
+}
+tr td:last-child{
+    width:1%;
+    white-space:nowrap;
+}
+#Authorized tr:first-child{
+  /*CURRENT USER should be designated*/
+  background-color: darkred;
+}
+
+#Authorized tr:nth-child(2){
+  /*added users are green*/
+  background-color: green;
+}
+
+#Authorized tr:last-child{
+  /*row for adding a new user is grey*/
+  background-color: grey;
+}
+
+
+
+/*DoorClosedDark default image, will change on
+interaction in the future*/
+#dcd{
+  max-width: 75%;
+  height: auto;
+  width: auto\9;
+}
+
+/*Deprecated code, but kept for posterity.
+Switch image sizing*/
+#switch{
+  max-width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+/*Setting checkbox as custom image*/
+.switcharino{
+  display: block;
+}
+
+.switcharino{
+  /*hiding the checkbox*/
+    opacity:0;
+    height: inherit;
+    width: inherit;
+    display:block;
+}
+/*Four hours of work later, bless this person: https://stackoverflow.com/questions/37582952/using-a-background-image-for-checkbox*/
+/*There is a different way to do this but couldn't figure out
+dynamic image sizing for mobile devices*/
+
+/*basically it sets the CHECKBOX to have same
+box as the image, while also making the
+original checkbox invisible*/
+input[type="checkbox"] {
+    opacity:0;
+    height: inherit;
+    width: inherit;
+    display:block;
+}
+input[type="checkbox"] + label{
+    content:url(./OffSwitch.jpg);
+    max-width: 75%;
+    display:block;
+}
+
+input[type="checkbox"]:checked + label{
+    content: url(./OnSwitch.jpg);
+    max-width: 75%;
+    display:block;
+}
+
+
+/*
+Custom button wrapper for what are actually
+clickable links
+*/
+.testButton{
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left:auto;
+    margin-right:auto;
+    display: inline-block;
+    max-width: inherit;
+    width: 100%;
+    padding: 1.5%;
+    background: lightgrey;
+    border: 1px solid #000;
+    box-sizing: inherit;
+}
+
+/*Settings to make inputFields prettier*/
+.inputField{
+  /*font-size-adjust: 0.5;
+  letter-spacing: 0.5;
+  text-align: left;
+  */
+  margin: 3%;
+
+}
+
+::placeholder{
+  text-overflow: ellipsis;
+}
+
+.input{
+  font-size-adjust: 0.5;
+  letter-spacing: 0.5pt;
+  text-align: left;
+  margin: 5%;
+}
