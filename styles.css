@@ -29,8 +29,70 @@ table{
 
 /*Dividing up the HTML screens:) */
 
+/*  SECTIONS  */
+.section {
+	clear: both;
+	padding: 0px;
+	margin: 0px;
+}
 
-.newAccountSection {
+/*  COLUMN SETUP  */
+.col {
+	display: block;
+	float:left;
+	margin: 1% 0 1% 1.6%;
+}
+.col:first-child { margin-left: 0; }
+
+/*  GROUPING  */
+.group:before,
+.group:after { content:""; display:table; }
+.group:after { clear:both;}
+.group { zoom:1; /* For IE 6/7 */ }
+/*  GRID OF THREE  */
+.span_3_of_3 {
+
+   width: 100%;
+ }
+.span_2_of_3 {
+
+  width: 66.13%;
+}
+.span_1_of_3 {
+
+  width: 32.26%;
+}
+
+
+
+#login-Fields{
+  width: 66.13%;
+}
+
+#login-Controls{
+  margin: auto;
+}
+
+#newUserFields {
+  visibility: inherit;
+}
+
+#newUserControls {
+  visibility: inherit;
+}
+
+
+.NavPanel {
+    background-color: #9933cc;
+    padding: 15px;
+    margin: 0px;
+    width: auto;
+
+    height:auto;
+}
+
+#newAccountSection {
+
   border: 4px solid black;
   background-color: #9933cc;
 }
@@ -64,6 +126,16 @@ a.button {
     color: initial;
 }
 
+#loginViewButton{
+  background-color: #9933cc;
+}
+#garageViewButton{
+  background-color: #9933cc;
+}
+#advancedViewButton{
+  background-color: #9933cc;
+}
+
 
 /*
 Custom button wrapper for what are actually
@@ -85,14 +157,9 @@ clickable links
     background: lightgrey;
     border: 1px solid #000;
     box-sizing: inherit;
+    visibility: inherit;
 }
 
-#warningLine {
-  color: red;
-}
-.validEmail {
-  color: red;
-}
 
 .masonPic{
   width: 100%;
@@ -108,6 +175,7 @@ clickable links
   letter-spacing: 0.5;
   text-align: left;
   */
+  visibility: inherit;
   margin: 3%;
 
 }

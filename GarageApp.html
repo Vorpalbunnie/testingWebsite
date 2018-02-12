@@ -1,31 +1,100 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>DBI Login </title>
+	 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+	 <title>DBI Garage</title>
+	 <link rel="stylesheet" href="styles.css">
+	 <script src="./GarageApp.js"></script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-  <div class="header">
-    <h1>DBI Garage-Door Login</h1>
-  </div>
-	<div class="col-container">
-    <div class="col-3"></div>
-    <div class="col-6" id="login">
-			<input class="inputField" placeholder="Username"/><br>
-      <input class="inputField" placeholder="Password"/><br>
+</div>
+<div id="headerPanel" class="NavPanel">
+	<div class="col span_1_of_3">
+		<button id="loginViewButton" class="testButton">
+			Login Screen
+		</button>
+	</div>
+	<div class="col span_1_of_3">
+		<button id="garageViewButton" class="testButton">
+			Garage
+		</button>
+	</div>
+	<div class="col span_1_of_3">
+		<button id="advancedViewButton" class="testButton">
+			Advanced
+		</button>
+	</div>
+</div>
 
-      <img id="d" src="resources/pictures/BrightClosing.gif" alt="garage door status"><br>
-      <img id="d" src="./resources/pictures/DoorClosingAnim.html" alt="garage door status"><br>
-		  <a class="testButton" href="garageView.html">Login</a><br>
-			<a class="testButton" href="newUser.html">Create Account</a>
-    </div>
-    <div class="col-3"></div>
-
-  </div>
+<div id="appZone">
 
 
-<script src="./GarageApp.js"></script>
-</body>
+	<!-- FRESH N SPICEY LOGIN SCREEN -->
+ <section class= "testClassPleaseIgnore" id="login-tab">
+	 <div class="page-content">
+
+		 <div class="col span_1_of_3" id="login-Fields">
+	 		<input type="text" id="username" class="inputField" placeholder="Username?">
+			</input> <br>
+	 		<input type="password" id="yourPassword" class="inputField" placeholder="Password?">
+	 		</input>
+	 	</div>
+
+	<div class="col span_1_of_3" id="login-Controls">
+		<button id="loginButton" class="testButton">
+			Login
+		</button>
+		<button id="newUserButton" class="testButton">
+			New User
+		</button>
+	</div>
+
+
+ 				<!-- *** NEW ACCOUNT *** -->
+
+	<div class="col span_3_of_3" id="newAccountSection">
+
+		<div class="col span_1_of_3" id="newUserFields">
+		 <input type="text" id="chooseUsername" class="inputField" placeholder="Username?">
+		 </input> <br>
+		 <input type="email" id="yourEmail" class="inputField" placeholder="Valid Email">
+		</input>
+		 <input type="password" id="firstPassword" class="inputField" placeholder="Password?">
+		 </input>
+		 <input type="password" id="secondPassword" class="inputField" placeholder="Confirm Password">
+		</input>
+	 </div>
+
+ <div class="col span_1_of_3" id="newUserControls">
+	 <button id="createAccountButton" class="testButton">
+		 Create Account
+	 </button>
+	 <button id="returnToLogin" class="testButton">
+		 Cancel <!--hide section when pushed-->
+	 </button>
+ </div>
+
+
+</div>
+
+</div>
+</section>
+
+
+<!--  ************************** Garage Tab ************************** -->
+
+
+
+
+
+</div>
+
+
+<!-- <script src="./GarageApp.js"></script>
+</body> -->
 </html>

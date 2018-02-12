@@ -3,7 +3,11 @@ var GarageModel = {
   open: true,
   light: true,
   opening: false,
+
+
   brightness: 5,
+
+
   autoCloseEnabled: false,
   autoOffEnabled: false,
 
@@ -97,6 +101,14 @@ var GarageModel = {
 */
 
 
+double(currentBrightness);
+
+function int double(input){
+
+  return input*2;
+}
+
+
 
 var myPicture
 var garageDisplay
@@ -105,8 +117,10 @@ var garageDisplay
 //
 function changePict(){
   console.log("success");
-  var pic;
 
+
+
+  var pic;
 
   switch (counter%4){
     case 0:
@@ -160,7 +174,7 @@ function pictureTest(){
     console.log("we trying");
 
 
-    
+
     setTimeout(1200,changePict());
 }
 
