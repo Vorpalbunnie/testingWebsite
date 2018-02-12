@@ -158,6 +158,9 @@ function changePict(){
 
 function pictureTest(){
     console.log("we trying");
+
+
+    
     setTimeout(1200,changePict());
 }
 
