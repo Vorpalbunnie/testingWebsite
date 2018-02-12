@@ -6,144 +6,161 @@
   <title>DBI Garage</title>
 
   <!-- Load Material Design Light Style/Resources: https://getmdl.io/ -->
+  <link rel="stylesheet" href="./resources/mdl/material.min.css">
   <link rel="stylesheet" href="styles.css">
-  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> -->
+  <script src="./resources/mdl/material.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body>
-<!-- Based on Simple Header with fixed tabs example: https://getmdl.io/components/index.html#layout-section/layout -->
+  <!-- Based on Simple Header with fixed tabs example: https://getmdl.io/components/index.html#layout-section/layout -->
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
-              mdl-layout--fixed-tabs">
+  mdl-layout--fixed-tabs">
+  <!-- Page Header / Title -->
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">DBI Garage</span>
+    </div>
 
-    <!-- Page Header / Title -->
-    <header class="mdl-layout__header">
-      <div class="mdl-layout__header-row">
-        <!-- Title -->
-        <span class="mdl-layout-title">DBI Garage</span>
+
+    <div class="mdl-layout__tab-bar">
+      <a id="loginTab" href="#login-tab" class="mdl-layout__tab is-active">Login</a>
+      <a id="GarageTab" href="#Garage-tab" class="mdl-layout__tab">Garage</a>
+      <a id="AdvancedTab" href="#advanced-tab" class="mdl-layout__tab">Advanced</a>
+    </div>
+
+  </header>
+
+
+  <!-- ****************** Login ******************* -->
+  <main class="mdl-layout__content">
+    <script src="./GarageApp.js"></script>
+    <section class="mdl-layout__tab-panel is-active" id="login-tab">
+      <div class="page-content">
+        <div id="defaultFields" class="mdl-grid">
+
+          <div class="mdl-cell mdl-cell--9-col mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+            <form action="#">
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="username">
+                <label class="mdl-textfield__label" for="usename">Your username...</label>
+              </div>
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="yourPassword">
+                <label class="mdl-textfield__label" for="yourPassword">Your password...</label>
+              </div>
+            </form>
+          </div>
+          <div class="mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
+
+            <!-- Raised button with ripple -->
+            <button id="createAccountButton" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+              Create Account
+            </button>
+            <button id="loginButton" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+              Login
+            </button>
+          </div>
+
+        </div>
+
+        <div id="newAccountSection" class="mdl-grid is-active" hidden="true">
+          <div class="mdl-cell mdl-cell--9-col mdl-cell--6-col-tablet mdl-cell--3-col-phone"><div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="email" id="insertEmail">
+            <label class="mdl-textfield__label" for="insertEmail">Email</label>
+            <!-- <label style="color:red" id="validEmail"> Please list a valid email address </label> -->
+          </div>
+          <div class="mdl-cell mdl-cell--9-col mdl-cell--6-col-tablet mdl-cell--3-col-phone"><div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" id="chooseUsername">
+            <label class="mdl-textfield__label" for="chooseUsername">Desired username...</label>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="password" id="firstPassword">
+            <label class="mdl-textfield__label" for="firstPassword">Choose password...</label>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="password" id="secondPassword">
+            <label class="mdl-textfield__label" for="secondtPassword">Verify password...</label>
+          </div>
+        </div>
+        <div class="mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
+        </div>
+
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone"></div>
+        <div class="mdl-cell mdl-cell--9-col mdl-cell--6-col-tablet mdl-cell--2-col-phone"><button id="confirmAccountButton" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+          Create!
+        </button>
+
       </div>
-
-      <!-- Tabs -->
-      <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-				<a href="#login-tab" class="mdl-layout__tab is-active">Login</a>
-				<!-- maybe change to logout once logged in? -->
-        <a href="#Garage-tab" class="mdl-layout__tab">Garage</a>
-        <a href="#advanced-tab" class="mdl-layout__tab">Advanced</a>
-      </div>
-    </header>
-
-<!-- ****************** Login ******************* -->
-
-<section class="mdl-layout__tab-panel" id="login-tab">
-  <div class="page-content"></div>
-   <div class="mdl-grid">
-
-    <div class="mdl-cell mdl-cell--9-col mdl-cell--6-col-tablet mdl-cell--3-col-phone">Please Login</div>
-    <div class="mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
-      <label id="autoOffSwitchLabel" class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="autoOffButton">
-        <input id="autoOffSwitch" type="checkbox" class="mdl-switch__input" >
-        <span class="mdl-switch__label"></span></label>
-      </div>
-
-      <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone">Off time</div>
-      <div class="mdl-cell mdl-cell--9-col mdl-cell--6-col-tablet mdl-cell--2-col-phone">
-        <p style="width:100%">
-          <!-- <img id="random" src="resources/pictures/gifs/BrightClosing.gif" alt="garage door status"><br> -->
-        </p>
-      </div>
-      <div id="autoOffTimeLabel" class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--1-col-phone">100s</div>
+    </div>
   </div>
 </section>
 
 
 
-    <!--  ************************** Garage Tab ************************** -->
-    <main class="mdl-layout__content">
-      <section class="mdl-layout__tab-panel is-active" id="Garage-tab">
-        <div class="page-content">
-          <!-- Tab for Garage Controls: Uses Grid
-                12 columns on desktop
-                8 columns on tablets
-                4 columns on phones -->
-                <!-- MDL Spinner Component -->
-
-        <!-- <div id="loading" class="mdl-grid">
-            <div id="p2" class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">Loading</div>
-            <div id="p2" class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
-          </div> -->
+<!--  ************************** Garage Tab ************************** -->
+<section class="mdl-layout__tab-panel" id="Garage-tab">
+  <script src="./GarageModel.js"></script>
+  <div class="page-content">
+    <!-- Tab for Garage Controls: Uses Grid
+    12 columns on desktop
+    8 columns on tablets
+    4 columns on phones -->
+    <!-- MDL Spinner Component -->
+    <div id="allGarageControls" class="mdl-grid">
+      <div id="GarageDisplay" class="mdl-cell mdl-cell--8-col mdl-cell--5-col-tablet mdl-cell--3-col-phone">
 
 
-          <div id="allControls" class="mdl-grid">
-              <div class="mdl-cell mdl-cell--9-col mdl-cell--6-col-tablet mdl-cell--3-col-phone">Light</div>
-              <div class="mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
-                <label id="onOffSwitchLabel" class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="onOffSwitch">
-                  <input id="onOffSwitch" type="checkbox" class="mdl-switch__input" >
-                  <span class="mdl-switch__label"></span></label>
-                </div>
+        <img id="myPicture" src="./resources/pictures/DoorOpenLight.png" style="width:100%">
 
-<!--
-              <div class="mdl-cell mdl-cell--9-col mdl-cell--6-col-tablet mdl-cell--3-col-phone">Target Color</div>
-              <div id="targetColor" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--1-col-phone" style="background:red;"></div>
+        <!-- <div class="demo-card-image mdl-card mdl-shadow--2dp">
+          <div class="mdl-card__title mdl-card--expand"></div>
+          <div class="mdl-card__actions">
+            <span id="myPicture" class="masonPic">something</span>
+          </div>
+        </div> -->
 
 
-              <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone">Red</div>
-              <div class="mdl-cell mdl-cell--9-col mdl-cell--6-col-tablet mdl-cell--2-col-phone">
-                <p style="width:100%">
-                  <input id="redSlider" class="mdl-slider mdl-js-slider" type="range"  min="0" max="100" value="25" tabindex="0" style="background:red;">
-                </p>
-              </div>
-              <div id="redLabel" class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--1-col-phone">100</div>
+      </div>
+      <div id="GarageControls" class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--1-col-phone">
+        <button id="debugButton" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+          PUSHME
+        </button>
+      </div>
 
-              <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone">Green</div>
-              <div class="mdl-cell mdl-cell--9-col mdl-cell--6-col-tablet mdl-cell--2-col-phone">
-                <p style="width:100%">
-                  <input id="greenSlider" class="mdl-slider mdl-js-slider" type="range"  min="0" max="100" value="25" tabindex="0" style="background:green;">
-                </p>
-              </div>
-              <div id="greenLabel" class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--1-col-phone">100</div>
+    </div>
+  </div>
+</section>
 
-              <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone">Blue</div>
-              <div class="mdl-cell mdl-cell--9-col mdl-cell--6-col-tablet mdl-cell--2-col-phone">
-                <p style="width:100%">
-                  <input id="blueSlider" class="mdl-slider mdl-js-slider" type="range"  min="0" max="100" value="25" tabindex="0" style="background:blue;">
-                </p>
-              </div>
-              <div id="blueLabel" class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--1-col-phone">100</div>
--->
-              <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-                <button id="setColorButton" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="width:100%;">
-                  Set Color
-                </button>
-              </div>
-            </div>
+
+<!--  ************************** Advanced ************************** -->
+<section class="mdl-layout__tab-panel" id="advanced-tab">
+  <script src="./GarageApp.js"></script>
+  <div class="page-content">
+    <div class="mdl-grid">
+
+      <div class="mdl-cell mdl-cell--9-col mdl-cell--6-col-tablet mdl-cell--3-col-phone">Auto Off</div>
+      <div class="mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
+        <label id="autoOffSwitchLabel" class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="autoOffButton">
+          <input id="autoOffSwitch" type="checkbox" class="mdl-switch__input" >
+          <span class="mdl-switch__label"></span></label>
         </div>
-      </section>
 
-
-      <!--  ************************** Advanced ************************** -->
-      <section class="mdl-layout__tab-panel" id="advanced-tab">
-        <div class="page-content"><!-- Your content goes here --></div>
-         <div class="mdl-grid">
-
-          <div class="mdl-cell mdl-cell--9-col mdl-cell--6-col-tablet mdl-cell--3-col-phone">Auto Off</div>
-          <div class="mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
-            <label id="autoOffSwitchLabel" class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="autoOffButton">
-              <input id="autoOffSwitch" type="checkbox" class="mdl-switch__input" >
-              <span class="mdl-switch__label"></span></label>
-            </div>
-
-            <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone">Off time</div>
-            <div class="mdl-cell mdl-cell--9-col mdl-cell--6-col-tablet mdl-cell--2-col-phone">
-              <p style="width:100%">
-                <input id="autoOffTimeSlider" class="mdl-slider mdl-js-slider" type="range"  min="1" max="1000" value="25" tabindex="0" style="background:blue;">
-              </p>
-            </div>
-            <div id="autoOffTimeLabel" class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--1-col-phone">100s</div>
+        <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone">Off time</div>
+        <div class="mdl-cell mdl-cell--9-col mdl-cell--6-col-tablet mdl-cell--2-col-phone">
+          <p style="width:100%">
+            <input id="autoOffTimeSlider" class="mdl-slider mdl-js-slider" type="range"  min="1" max="1000" value="25" tabindex="0" style="background:blue;">
+          </p>
         </div>
-      </section>
-    </main>
+        <div id="autoOffTimeLabel" class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--1-col-phone">100s</div>
+      </div>
+    </section>
+  </main>
 
 </div>
-<script src="./GarageApp.js"></script>
+</div>
+<!-- <script src="./GarageApp.js"></script> -->
 
 </body>
 </html>
