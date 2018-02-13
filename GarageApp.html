@@ -1,100 +1,131 @@
 <!DOCTYPE html>
 <html>
 <head>
-	 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	 <meta name="viewport" content="width=device-width, initial-scale=1">
-	 <title>DBI Garage</title>
-	 <link rel="stylesheet" href="styles.css">
-	 <script src="./GarageApp.js"></script>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles.css">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>DBI Garage</title>
+	<link rel="stylesheet" href="styles.css">
+	<script src="./GarageApp.js"></script>
+	<script src="./GarageModel.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 </head>
 
+
+
 <body>
-</div>
-<div id="headerPanel" class="NavPanel">
-	<div class="col span_1_of_3">
-		<button id="loginViewButton" class="testButton">
-			Login Screen
-		</button>
-	</div>
-	<div class="col span_1_of_3">
-		<button id="garageViewButton" class="testButton">
-			Garage
-		</button>
-	</div>
-	<div class="col span_1_of_3">
-		<button id="advancedViewButton" class="testButton">
-			Advanced
-		</button>
-	</div>
-</div>
-
-<div id="appZone">
-
-
-	<!-- FRESH N SPICEY LOGIN SCREEN -->
- <section class= "testClassPleaseIgnore" id="login-tab">
-	 <div class="page-content">
-
-		 <div class="col span_1_of_3" id="login-Fields">
-	 		<input type="text" id="username" class="inputField" placeholder="Username?">
-			</input> <br>
-	 		<input type="password" id="yourPassword" class="inputField" placeholder="Password?">
-	 		</input>
-	 	</div>
-
-	<div class="col span_1_of_3" id="login-Controls">
-		<button id="loginButton" class="testButton">
-			Login
-		</button>
-		<button id="newUserButton" class="testButton">
-			New User
-		</button>
+	<div id="headerPanel" class="NavPanel">
+		<div class="col span_1_of_3">
+			<button id="loginViewButton" class="testButton">
+				Login Screen
+			</button>
+		</div>
+		<div class="col span_1_of_3">
+			<button id="garageViewButton" class="testButton">
+				Garage
+			</button>
+		</div>
+		<div class="col span_1_of_3">
+			<button id="advancedViewButton" class="testButton">
+				Advanced
+			</button>
+		</div>
 	</div>
 
 
- 				<!-- *** NEW ACCOUNT *** -->
+	<div id="appZone">
 
-	<div class="col span_3_of_3" id="newAccountSection">
+		<!-- FRESH N SPICEY LOGIN SCREEN -->
+		<section class= "testClassPleaseIgnore" id="loginTab">
+			<div class="page-content">
 
-		<div class="col span_1_of_3" id="newUserFields">
-		 <input type="text" id="chooseUsername" class="inputField" placeholder="Username?">
-		 </input> <br>
-		 <input type="email" id="yourEmail" class="inputField" placeholder="Valid Email">
-		</input>
-		 <input type="password" id="firstPassword" class="inputField" placeholder="Password?">
-		 </input>
-		 <input type="password" id="secondPassword" class="inputField" placeholder="Confirm Password">
-		</input>
-	 </div>
+				<div class="col span_1_of_3" id="login-Fields">
+					<input type="text" id="username" class="inputField" placeholder="Username?">
+				</input><br>
+				<input type="password" id="yourPassword" class="inputField" placeholder="Password?">
+			</input>
+		</div>
 
- <div class="col span_1_of_3" id="newUserControls">
-	 <button id="createAccountButton" class="testButton">
-		 Create Account
-	 </button>
-	 <button id="returnToLogin" class="testButton">
-		 Cancel <!--hide section when pushed-->
-	 </button>
- </div>
+		<div class="col span_1_of_3" id="login-Controls">
+			<button id="loginButton" class="testButton">
+				Login
+			</button>
+			<button id="newUserButton" class="testButton">
+				New User
+			</button>
+		</div>
 
 
-</div>
+		<!-- *** NEW ACCOUNT *** -->
+
+		<div class="col span_3_of_3" id="newAccountSection">
+			<div class="col span_1_of_3" id="newUserFields">
+				<input type="text" id="chooseUsername" class="inputField" placeholder="Username?"></input><br>
+				<input type="email" id="yourEmail" class="inputField" placeholder="Valid Email"></input><br>
+				<input type="password" id="firstPassword" class="inputField" placeholder="Password?"></input><br>
+				<input type="password" id="secondPassword" class="inputField" placeholder="Confirm Password"></input><br>
+			</div>
+			<div class="col span_1_of_3" id="newUserControls">
+				<button id="createAccountButton" class="testButton">
+					Create Account
+				</button>
+				<button id="returnToLogin" class="testButton">
+					Cancel <!--hide section when pushed-->
+				</button>
+			</div>
+		</div>
+
+	</div>
+</section>
+<section class="userInfoClass"
+<div class="page-content" id="userInfo"
+	<div class="col span_3_of_3" id="userInfoStrings">
+	HEY ITS YOU NICE<br>
+	THIS IS YOUR EMAIL MATE
+
+	<button id="logout" class="testButton">
+	LOGOUT
+	</button>
+	</div>
+
 
 </div>
 </section>
 
-
 <!--  ************************** Garage Tab ************************** -->
 
+<section class= "garageView" id="garageTab">
+	<div class="page-content">
+		Your Garage My Dude
+		<img id="myPicture" src="./resources/pictures/DoorOpenLight.png" style="width:100%">
+		<img id="myAnimation" src="./resources/pictures/DoorOpenLight.png" style="width:100%">
+
+		<div class="col span_3_of_3" id="garageControls">
+			<div class="col span_2_of_3" id="lightCol">
+				<img id="switchPic" src="./resources/pictures/onSwitch.jpg" style="max-width:75%">
+				<img id="switchAnim" src="./resources/pictures/onSwitch.jpg" style="max-width:75%">
+			</div>
+			<div class="col span_2_of_3" id="openControls">
+				<button id="debugButton" class="testButton">
+				OPEN / CLOSE
+				</button>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!--  ************************** Advanced Tab ************************** -->
+
+<section class= "advancedView" id="advancedTab">
+	<div class="page-content">
+		ADVANCED IRON
+	</div>
+</section>
 
 
 
 
 </div>
-
-
-<!-- <script src="./GarageApp.js"></script>
-</body> -->
+</body>
 </html>

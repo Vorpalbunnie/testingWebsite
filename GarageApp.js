@@ -1,3 +1,7 @@
+
+
+
+
 function wait(timeInSeconds) {
   var start = Date.now();
   var endTime = start + timeInSeconds*1000;
@@ -33,13 +37,58 @@ function login(){
 }
 
 
+// NAV BAR
+var loginTab
+var garageTab
+var advancedTab
+var userInfoTab
+
+var loginViewButton
+var garageViewButton
+var advancedViewButton
+
+function loginScreen(){
+  //When changing back, display current username and email?
+  //with a logout button!
+  userInfoTab.style.display = "block";
+  garageViewButton.disabled = false;
+  loginViewButton.disabled = true;
+  advancedViewButton.disabled = false;
+  garageTab.style.display = "none";
+  userInfoTab.style.display = "block";
+  advancedTab.style.display = "none";
+  //loginTab.style.display = "block";
+}
+function garageScreen(){
+  userInfoTab.style.display = "none";
+  loginTab.style.display = "none";
+  garageTab.style.display = "block";
+  loginViewButton.innerHTML = "User Info";
+  advancedTab.style.display = "none";
+  advancedViewButton.disabled = false;
+  garageViewButton.disabled = true;
+  loginViewButton.disabled = false;
+
+  //enables the navBar buttons
+  //set all other screens to be display none
+  //change login to say logout
+}
+function advancedScreen(){
+  userInfoTab.style.display = "none";
+  loginTab.style.display = "none";
+  garageTab.style.display = "none";
+  loginViewButton.innerHTML = "User Info";
+  advancedTab.style.display = "block";
+  advancedViewButton.disabled = true;
+  garageViewButton.disabled = false;
+  loginViewButton.disabled = false;
+}
 
 
 
 
 
-
-//   LOGIN SCREEN ITEMS //
+//------------   LOGIN SCREEN ITEMS ---------------//
 var loginControls
 var inputFields
 
@@ -67,12 +116,10 @@ function passwordEntryStart(){
   console.log("start password");
 }
 
+
 function accountCreation(){
   console.log("New Account")
-  newAccountSection.hidden = false;
-
-  //document.getElementById("defaultFields").hidden = true;
-  //document.getElementById("newUserButton").disabled = true;
+  newAccountSection.style.visibility = "visible";
   loginButton.disabled = true;
   createAccountButton.disabled = true;
   confirmAccountButton.disabled = false;
@@ -80,7 +127,7 @@ function accountCreation(){
 }
 function accountConfirmation(){
   console.log("account confirmed buddy")
-  //document.getElementById("defaultFields").hidden = false;
+  newAccountSection.style.visibility = "hidden";
   loginButton.disabled = false;
   createAccountButton.disabled = false;
   confirmAccountButton.disabled = true;
@@ -88,6 +135,7 @@ function accountConfirmation(){
   cancelButton.disabled = true;
 }
 function cancelUser(){
+  newAccountSection.style.visibility = "hidden";
   loginButton.disabled = false;
   createAccountButton.disabled = false;
   confirmAccountButton.disabled = true;
@@ -96,8 +144,86 @@ function cancelUser(){
 }
 
 
+
+
+var lightSwitch
+var lit = true
+var currentLight
+
+
+function lightSwitchFunc(){
+  var pic;
+  switch (lit){
+    case true:
+    document.getElementById('switchPic').style.display = "none";
+    document.getElementById('switchAnim').style.display = "block";
+    document.getElementById('switchAnim').src = "./resources/pictures/gifs/onOff.gif";
+    document.getElementById('switchAnim').style.display = "block";
+    lit = false;
+    currentLight = "./resources/pictures/OffSwitch.jpg";
+    setTimeout(animateLight, 1500);
+    break;
+
+    case false:
+    pic = addBCgif;
+    document.getElementById('switchPic').style.display = "none";
+    document.getElementById('switchAnim').style.display = "block";
+    document.getElementById('switchAnim').src = "./resources/pictures/gifs/offOn.gif";
+    document.getElementById('switchAnim').style.display = "block";
+    lit = true;
+    currentLight =  "./resources/pictures/OnSwitch.jpg";
+    setTimeout(animateLight, 1500);
+    break;
+
+}
+}
+function animateLight(){
+    document.getElementById('switchAnim').style.display = "none";
+    document.getElementById('switchPic').src = this.currentLight;
+    //document.getElementById('switchPic').src = this.currentPic;
+    document.getElementById('switchPic').style.display = "block";
+    console.log("Swapped!");
+}
+
+
+
+
+
+
 document.addEventListener("DOMContentLoaded", function(event) {
+
+  document.getElementById("garageTab").style.display = 'none';
+  document.getElementById("userInfo").style.display = 'none';
+  document.getElementById("advancedTab").style.display = 'none';
+
+
   console.log("Document Loaded")
+
+
+
+  //NavPanel
+    //Variables
+    loginTab = document.getElementById("loginTab")
+    garageTab = document.getElementById("garageTab")
+    userInfoTab = document.getElementById("userInfo")
+    advancedTab = document.getElementById("advancedTab")
+    loginViewButton = document.getElementById("loginViewButton")
+    garageViewButton = document.getElementById("garageViewButton")
+    advancedViewButton = document.getElementById("advancedViewButton")
+
+
+    //Listeners
+    document.getElementById("loginViewButton").addEventListener("click", loginScreen)
+    document.getElementById("garageViewButton").addEventListener("click", garageScreen)
+    document.getElementById("advancedViewButton").addEventListener("click", advancedScreen)
+
+    garageViewButton.disabled = true;
+    loginViewButton.disabled = true;
+    advancedViewButton.disabled = true;
+
+
+
+
   //Login Screen
     //Variables
     loginControls = document.getElementById("login-Controls")
@@ -114,6 +240,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("newUserButton").addEventListener("click", accountCreation)
     document.getElementById("yourPassword").addEventListener("blur", passwordEntry)
     document.getElementById("yourPassword").addEventListener("click", passwordEntryStart)
+    document.getElementById("loginButton").addEventListener("click", garageScreen)
 
   //New Account
     //Variables
@@ -133,37 +260,25 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("secondPassword").addEventListener("blur", passwordValidation)
     document.getElementById("yourEmail").addEventListener("blur", emailValidation)
     document.getElementById("yourEmail").addEventListener("change", emailValidation)
-    document.getElementById("returnToLogin").addEventListener("change", cancelUser)
+    document.getElementById("returnToLogin").addEventListener("click", cancelUser)
 
 
 
+//Garage Screen
+  //Variables
+  lightSwitch = document.getElementById("switchPic")
 
+  //Listeners
+  document.getElementById("switchPic").addEventListener("click", lightSwitchFunc)
 
-
-
-
-  // document.getElementById("setColorButton").addEventListener("click", setColorClicked)
-  // document.getElementById("redSlider").addEventListener("change", redSliderChange)
-  // document.getElementById("greenSlider").addEventListener("change", greenSliderChange)
-  // document.getElementById("blueSlider").addEventListener("change", blueSliderChange)
-  // autoOffTimeSlider.addEventListener("change", autoOffSliderChange)
-  // autoOffSwitch.addEventListener("click", autoOffUpdate)
-  // onOffSwitch.addEventListener("click", onOffUpdate)
-  //
   // // Getting the initial state
-  console.log("Getting Initial State")
-  newAccountSection.hidden = true;
-  
+console.log("Getting Initial State")
+
+
+newAccountSection.style.visibility = "hidden"
+
+document.getElementById("switchAnim").style.display = 'none';
 
 
   //newAccountSection.display = none;
-
-
-
-  // loading.hidden = true;
-  // controls.hidden = true;
-  //loadingPage(true)
-  // light.getState(stateUpdate)
-  // light.setStateChangeHandler(stateUpdate)
-  // updateTargetColor()
 })

@@ -42,7 +42,7 @@ table{
 	float:left;
 	margin: 1% 0 1% 1.6%;
 }
-.col:first-child { margin-left: 0; }
+.col:first-child { margin-left: 0;}
 
 /*  GROUPING  */
 .group:before,
@@ -51,15 +51,12 @@ table{
 .group { zoom:1; /* For IE 6/7 */ }
 /*  GRID OF THREE  */
 .span_3_of_3 {
-
    width: 100%;
  }
 .span_2_of_3 {
-
   width: 66.13%;
 }
 .span_1_of_3 {
-
   width: 32.26%;
 }
 
@@ -74,11 +71,12 @@ table{
 }
 
 #newUserFields {
-  visibility: inherit;
+  width: 66.13%;
+  /*max-width: 100%;*/
 }
 
 #newUserControls {
-  visibility: inherit;
+  margin:auto;
 }
 
 
@@ -87,14 +85,15 @@ table{
     padding: 15px;
     margin: 0px;
     width: auto;
-
     height:auto;
 }
 
 #newAccountSection {
-
+  width:100%;
+  margin: auto;
   border: 4px solid black;
   background-color: #9933cc;
+
 }
 
 .header {
@@ -157,7 +156,6 @@ clickable links
     background: lightgrey;
     border: 1px solid #000;
     box-sizing: inherit;
-    visibility: inherit;
 }
 
 
@@ -175,7 +173,7 @@ clickable links
   letter-spacing: 0.5;
   text-align: left;
   */
-  visibility: inherit;
+  max-width: 100%;
   margin: 3%;
 
 }
