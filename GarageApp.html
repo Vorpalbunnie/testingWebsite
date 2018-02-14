@@ -148,14 +148,14 @@
 			<div class="col span_3_of_3" id="advanedTabControls">
 				<div class="col span_1_of_3" id="doorControls">
 					<h2> Door automatically closes after: </h2>
-					<input type="number" id="closeTimeout" class="inputField" placeholder="Seconds"></input><br>
+					<input type="number" id="closeTimeout" class="inputField" min="5" max="60" placeholder="Seconds"></input><br>
 					<button id="autoClose" class="testButton">
 						ENABLE autoClose
 					</button>
 				</div>
 				<div class="col span_1_of_3" id="lightControls">
 					<h2> Light automatically shuts off after: </h2>
-					<input type="number" id="offTimeout" class="inputField" placeholder="Seconds"></input><br>
+					<input type="number" id="offTimeout" class="inputField" min="1" max="60" placeholder="Seconds"></input><br>
 					<button id="autoOff" class="testButton">
 						ENABLE autoOff
 					</button>

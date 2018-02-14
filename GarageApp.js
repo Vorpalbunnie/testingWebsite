@@ -52,16 +52,20 @@ function loginScreen(){
   //loginTab.style.display = "block";
 }
 function garageScreen(){
-  userInfoTab.style.display = "none";
-  loginTab.style.display = "none";
-  garageTab.style.display = "block";
-  loginViewButton.innerHTML = "User Info";
-  advancedTab.style.display = "none";
-  advancedViewButton.disabled = false;
-  garageViewButton.disabled = true;
-  loginViewButton.disabled = false;
-  hideLoading();
-
+  if(loadTheGarage()){
+    userInfoTab.style.display = "none";
+    loginTab.style.display = "none";
+    garageTab.style.display = "block";
+    loginViewButton.innerHTML = "User Info";
+    advancedTab.style.display = "none";
+    advancedViewButton.disabled = false;
+    garageViewButton.disabled = true;
+    loginViewButton.disabled = false;
+    hideLoading();
+  } else {
+    alert("error loading garage!");
+    hideLoading();
+  }
   //enables the navBar buttons
   //set all other screens to be display none
   //change login to say logout
@@ -99,6 +103,16 @@ function logout(){
   cancelButton.disabled = true;
 }
 
+
+function loadTheGarage(){
+  if(GarageModel.currentState){
+    console.log("loaded");
+    return true;
+  } else {
+    console.log("nothing");
+    return false;
+  }
+}
 //------------   LOGIN SCREEN ITEMS ---------------//
 //------------   LOGIN SCREEN ITEMS ---------------//
 //------------   LOGIN SCREEN ITEMS ---------------//
@@ -197,26 +211,26 @@ function accountConfirmation(){
     alert("Please enter a valid email address");
   }
   if(passCheck && userCheck && emailCheck){
-      consoleWrapper("PassConfirmCheck");
-      userInfo.setHandler('password', newPassword.value);
-      userInfo.setHandler('userName', newUser.value);
+    consoleWrapper("PassConfirmCheck");
+    userInfo.setHandler('password', newPassword.value);
+    userInfo.setHandler('userName', newUser.value);
 
-      password.value = newPassword.value;
-      username.value = newUser.value;
+    password.value = newPassword.value;
+    username.value = newUser.value;
 
-      newPassword.value = "";
-      newEmail.value = "";
-      validPassword.value = "";
-      newUser.value = "";
+    newPassword.value = "";
+    newEmail.value = "";
+    validPassword.value = "";
+    newUser.value = "";
 
 
-      newAccountSection.style.visibility = "hidden";
-      loginButton.disabled = false;
-      createAccountButton.disabled = false;
-      confirmAccountButton.disabled = true;
-      newAccountSection.hidden = true;
-      cancelButton.disabled = true;
-    }
+    newAccountSection.style.visibility = "hidden";
+    loginButton.disabled = false;
+    createAccountButton.disabled = false;
+    confirmAccountButton.disabled = true;
+    newAccountSection.hidden = true;
+    cancelButton.disabled = true;
+  }
 
 
 }
@@ -300,7 +314,6 @@ var lightSwitchModel = {
 function lightAffectGarage(){
   //This changes the garageLightSettings!
   //Called when lightSwitch is touched
-  cconsoleWrapper("Light -> Garage");
   switch (lightSwitchModel.light){
     case false:
     GarageModel.setHandler("light", true);
@@ -420,7 +433,6 @@ function animateGarage(gif,newPic){
   document.getElementById('myPicture').style.display = "none";
   document.getElementById('myAnimation').style.display = "block";
   document.getElementById('myAnimation').src = gif;
-
   console.log("lets wait!");
   setTimeout(function(){swapGaragePic(newPic);}, 1750);
   console.log("doneWaiting!");
@@ -469,9 +481,10 @@ function swapGaragePic(picture){
 ////////////////////////////////////TIMING////////////////////////////////////
 function startTimer(object){
   //this works!
-  var timeValue = GarageModel.getHandler(object);
+  var timeValue = 1000*(GarageModel.getHandler(object));
   console.log(timeValue);
   setTimeout(function(){shutOff(object);}, timeValue);
+
 }
 
 
@@ -486,7 +499,6 @@ function shutOff(object){
       lightChangeHandler('buttonClick');
     }
     break;
-
     case "closeTimeDuration":
     console.log("switch statement closeTime");
     loading(updateDoor);
@@ -500,7 +512,6 @@ function loading(nextFunction){
   document.getElementById('garageControlButton').disabled = true;
   console.log("loadingFunc");
   document.getElementById("loadingIcon").style.display = 'block';
-
   //LOADING IS DONE FOR AN ADDITION SECOND BEFORE EXECUTION
   setTimeout(function(){nextFunction();}, 1000);
 
@@ -551,20 +562,39 @@ function boolChecker(button,interest){
 }
 
 function rangeValues(dataSource, interest){
+  document.getElementById("brightThing").innerHTML = brightness.value;
   consoleWrapper("Range Adjusted!")
   consoleWrapper(dataSource)
   console.log(dataSource.value);
   var newValue = dataSource.value;
+
+  interest.value = newValue;
   console.log(newValue);
   GarageModel.setHandler(interest,newValue);
   //GarageModel[interest] = newValue;
   console.log(GarageModel[dataSource]);
   console.log("range set!");
-  document.getElementById("brightThing").innerHTML = GarageModel.getHandler('brightness');
+
 }
 
 
+//Manually set things
+function manuallySetBrightness(input){
+  brightness.value = input;
+  document.getElementById("brightThing").innerHTML = input;
+  rangeValues(brightness, 'brightness');
+  document.getElementById("brightThing").innerHTML = GarageModel.getHandler('brightness');
+}
 
+function manuallySetCloseTime(input){
+  closeTime.value = input;
+  rangeValues(closeTime, 'closeTimeDuration');
+}
+
+function manuallySetOffTime(input){
+  offTime.value = input;
+  rangeValues(offTime, 'offTimeDuration');
+}
 
 /////////////////////////////////CUSTOM DEBUG MODE/////////////////////////////////
 /////////////////////////////////CUSTOM DEBUG MODE/////////////////////////////////
@@ -573,19 +603,19 @@ function rangeValues(dataSource, interest){
 /////////////////////////////////CUSTOM DEBUG MODE/////////////////////////////////
 /////////////////////////////////CUSTOM DEBUG MODE/////////////////////////////////
 function isKeyPressed(event) {
-    var x = document.getElementById("something");
-    if (event.shiftKey) {
-        console.log("DEBUG MODE ENABLED");
-        document.getElementById("debuggler").style.display = "block";
-        document.getElementById("debuggler1").style.display = "block";
-        document.getElementById("something").innerHTML = "HIDE";
-    }
-    else {
-        console.log("The SHIFT key was NOT pressed!");
-        document.getElementById("debuggler").style.display = "none";
-        document.getElementById("debuggler1").style.display = "none";
-        document.getElementById("something").innerHTML = "DEBUG";
-    }
+  var x = document.getElementById("something");
+  if (event.shiftKey) {
+    console.log("DEBUG MODE ENABLED");
+    document.getElementById("debuggler").style.display = "block";
+    document.getElementById("debuggler1").style.display = "block";
+    document.getElementById("something").innerHTML = "HIDE";
+  }
+  else {
+    console.log("The SHIFT key was NOT pressed!");
+    document.getElementById("debuggler").style.display = "none";
+    document.getElementById("debuggler1").style.display = "none";
+    document.getElementById("something").innerHTML = "DEBUG";
+  }
 }
 
 
@@ -607,10 +637,10 @@ function consoleWrapper(string){
 ////////////////////////////////////ON LOADING////////////////////////////////////
 document.addEventListener("DOMContentLoaded", function(event) {
 
-////////////HIDE THINGS////////////
-////////////HIDE THINGS////////////
-////////////HIDE THINGS////////////
-////////////HIDE THINGS////////////
+  ////////////HIDE THINGS////////////
+  ////////////HIDE THINGS////////////
+  ////////////HIDE THINGS////////////
+  ////////////HIDE THINGS////////////
   document.getElementById("loadingIcon").display = 'none';
   document.getElementById("loadingIcon").style.display = 'none';
   document.getElementById("garageTab").style.display = 'none';
@@ -620,10 +650,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
 
-///////NAV PANEL///////
-///////NAV PANEL///////
-///////NAV PANEL///////
-///////NAV PANEL///////
+  ///////NAV PANEL///////
+  ///////NAV PANEL///////
+  ///////NAV PANEL///////
+  ///////NAV PANEL///////
   //Variables
   loginTab = document.getElementById("loginTab")
   garageTab = document.getElementById("garageTab")
@@ -646,10 +676,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
 
-///////////Login Screen///////////
-///////////Login Screen///////////
-///////////Login Screen///////////
-///////////Login Screen///////////
+  ///////////Login Screen///////////
+  ///////////Login Screen///////////
+  ///////////Login Screen///////////
+  ///////////Login Screen///////////
 
   //Variables
   loginControls = document.getElementById("login-Controls")
@@ -670,11 +700,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
 
-//////////////New Account//////////////
-//////////////New Account//////////////
-//////////////New Account//////////////
-//////////////New Account//////////////
-//////////////New Account//////////////
+  //////////////New Account//////////////
+  //////////////New Account//////////////
+  //////////////New Account//////////////
+  //////////////New Account//////////////
+  //////////////New Account//////////////
 
   //Variables
   newUser = document.getElementById("chooseUsername")
@@ -695,11 +725,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
   document.getElementById("returnToLogin").addEventListener("click", cancelUser)
 
 
-/////////////Garage Screen/////////////
-/////////////Garage Screen/////////////
-/////////////Garage Screen/////////////
-/////////////Garage Screen/////////////
-/////////////Garage Screen/////////////
+  /////////////Garage Screen/////////////
+  /////////////Garage Screen/////////////
+  /////////////Garage Screen/////////////
+  /////////////Garage Screen/////////////
+  /////////////Garage Screen/////////////
   //Variables
   lightSwitch = document.getElementById("switchPic")
   myPicture = document.getElementById("myPicture")
@@ -710,11 +740,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
   document.getElementById("myAnimation").style.display = "none";
 
 
-////////////////ADVANCED////////////////
-////////////////ADVANCED////////////////
-////////////////ADVANCED////////////////
-////////////////ADVANCED////////////////
-////////////////ADVANCED////////////////
+  ////////////////ADVANCED////////////////
+  ////////////////ADVANCED////////////////
+  ////////////////ADVANCED////////////////
+  ////////////////ADVANCED////////////////
+  ////////////////ADVANCED////////////////
 
   //variables
   autoClose = document.getElementById("autoClose")
@@ -733,14 +763,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
 
-///HIDING THINFS BEFORE LAUNCHING///
+  ///HIDING THINFS BEFORE LAUNCHING///
   newAccountSection.style.visibility = "hidden";
   document.getElementById("switchAnim").style.display = 'none';
   document.getElementById("debuggler").style.display = 'none';
   document.getElementById("debuggler1").style.display = 'none';
 
 
-///NIIIIIIICE BUDDY///
+  ///NIIIIIIICE BUDDY///
   document.getElementById("something").addEventListener("click", isKeyPressed);
 
   //newAccountSection.display = none;
