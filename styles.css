@@ -11,6 +11,8 @@ html {
   font-family: "Lucida Sans", sans-serif;
   text-align: center;
   background: #6766ff;
+
+
 }
 /*div{
   max-height:100%;
@@ -21,6 +23,7 @@ html, body {
   padding:0;
   background-size: 100%;
   background: url(./resources/pictures/backgroundAttempt.png) repeat;
+
 }
 
 br{
@@ -110,13 +113,7 @@ width: 50%;
 }
 
 
-.NavPanel {
-    background-color: #65c800;
-    padding: 15px;
-    margin: 0px;
-    width: auto;
-    height:auto;
-}
+
 
 #newAccountSection {
   width:100%;
@@ -126,11 +123,19 @@ width: 50%;
 
 }
 
+.NavPanel {
+    background-color: #65c800;
+    padding: 1vw;
+    margin: 0px;
+    width: auto;
+    height:auto;
+}
 .header {
     background-color: #8dff66;
     color: #8dff66;
-    padding: 15px;
+    /*padding: 15px;*/
     margin: 0px;
+    height: 2vh;
     width: auto;
 }
 .boxborder {
