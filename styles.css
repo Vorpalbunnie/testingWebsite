@@ -10,12 +10,13 @@ and
 html {
   font-family: "Lucida Sans", sans-serif;
   text-align: center;
+  background: #6766ff;
 }
-div{
+/*div{
   max-height:100%;
-}
+}*/
 html, body {
-  width: 100%;
+  max-width: 100%;
   margin:0;
   padding:0;
 }
@@ -24,7 +25,21 @@ br{
   line-height: 100%;
 }
 table{
-  font-size: 12pt;
+  font-size: 10%;
+}
+
+h1 {
+  /*font-size: 36px; /* Some tweener fallback that doesn't look awful */*/
+  font-size: 4.0vw;
+}
+
+h2 {
+  font-size: 3.0vh;
+}
+
+p {
+  font-size: 2vmin;
+
 }
 
 /*Dividing up the HTML screens:) */
@@ -32,8 +47,8 @@ table{
 /*  SECTIONS  */
 .section {
 	clear: both;
-	padding: 0px;
-	margin: 0px;
+	padding: 0%;
+	margin: 0%;
 }
 
 /*  COLUMN SETUP  */
@@ -43,7 +58,6 @@ table{
 	margin: 1% 0 1% 1.6%;
 }
 .col:first-child { margin-left: 0;}
-
 /*  GROUPING  */
 .group:before,
 .group:after { content:""; display:table; }
@@ -60,9 +74,14 @@ table{
   width: 32.26%;
 }
 
+.span_test_of_test{
+width: 50%;
+}
+
 
 
 #login-Fields{
+  margin: auto;
   width: 66.13%;
 }
 
@@ -81,7 +100,7 @@ table{
 
 
 .NavPanel {
-    background-color: #9933cc;
+    background-color: #65c800;
     padding: 15px;
     margin: 0px;
     width: auto;
@@ -92,13 +111,13 @@ table{
   width:100%;
   margin: auto;
   border: 4px solid black;
-  background-color: #9933cc;
+  background-color: #65c800;
 
 }
 
 .header {
-    background-color: #9933cc;
-    color: #9933cc;
+    background-color: #8dff66;
+    color: #8dff66;
     padding: 15px;
     margin: 0px;
     width: auto;
@@ -108,31 +127,33 @@ table{
 }
 
 
-.full-width {
-  width:100%;
+
+
+#switchPic, #switchAnim{
+  margin:auto;
+}
+
+#myPicture, #myAnimation{
+  margin:auto;
 }
 
 
-.link{
-  text-decoration: underline;
-  color: white;
-}
-
-
-/* Link Styling: https://stackoverflow.com/questions/2906582/how-to-create-an-html-button-that-acts-like-a-link*/
-a.button {
-    text-decoration: none;
-    color: initial;
-}
 
 #loginViewButton{
-  background-color: #9933cc;
+  font-size: 4.0vw;
+  margin-top: 0;
+  background-color: #ff962b;
 }
+
 #garageViewButton{
-  background-color: #9933cc;
+  margin-top: 0;
+  font-size: 4.0vw;
+  background-color: #ff962b;
 }
 #advancedViewButton{
-  background-color: #9933cc;
+  margin-top: 0;
+  font-size: 4.0vw;
+  background-color: #ff962b;
 }
 
 
@@ -141,7 +162,13 @@ Custom button wrapper for what are actually
 clickable links
 */
 
+.mySlidey{
+  width: 90%;
+  margin: auto;
+}
+
 .testButton{
+    border-radius: 5px;
     text-align: center;
     text-decoration: none;
     color: black;
@@ -153,29 +180,28 @@ clickable links
     max-width: inherit;
     width: 100%;
     padding: 1.5%;
-    background: lightgrey;
+    background: #ff8000;
     border: 1px solid #000;
     box-sizing: inherit;
+    font-size: 2.0vw;
+    box-shadow: 0.5vh 0.5vw 1vh #7a3d00;
 }
 
+.testButton:hover { background-color: #ff9933 }
 
-.masonPic{
-  width: 100%;
-  height: 100%;
-  background: url('./resources/pictures/DoorCloseDark.png') center / cover;
-
+.testButton:active {
+  background-color: #cc6600;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 
 /*Settings to make inputFields prettier*/
 .inputField{
-  /*font-size-adjust: 0.5;
-  letter-spacing: 0.5;
-  text-align: left;
-  */
+  font-size: 2.0vw;
   max-width: 100%;
   margin: 3%;
-
+  box-shadow: 2px 2px #7a3d00;
 }
 
 ::placeholder{
@@ -183,8 +209,18 @@ clickable links
 }
 
 .input{
-  font-size-adjust: 0.5;
-  letter-spacing: 0.5pt;
   text-align: left;
   margin: 5%;
+}
+
+
+.imageWrapper {
+  position: relative;
+}
+
+.overlayImage {
+  position: absolute;
+  width: 20%;
+  top: 50%;
+  left: 50%;
 }

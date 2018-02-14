@@ -1,7 +1,3 @@
-
-
-
-
 function wait(timeInSeconds) {
   var start = Date.now();
   var endTime = start + timeInSeconds*1000;
@@ -12,28 +8,27 @@ function wait(timeInSeconds) {
 
 
 
-
-
-
-
 function passwordValidation(){
-    if(newPassword.value != document.getElementById("secondPassword").value){
-      confirmAccountButton.disabled = true;
-    } else {
-      confirmAccountButton.disabled = false;
-    }
+  if(newPassword.value != document.getElementById("secondPassword").value){
+    confirmAccountButton.disabled = true;
+  } else {
+    confirmAccountButton.disabled = false;
+  }
 }
 
 function emailValidation(){
- /* no clue lol */
+  /* no clue lol */
 }
 
 
 
 function login(){
-  document.getElementById("GarageTab").click()
-  document.script = "GarageModel.js";
-  console.log("big pepsi");
+  console.log("stateChange(pepsi)");
+  setTimeout(garageScreen, 100);
+}
+
+function pepsi(){
+  console.log("PEPSI MAN!!!!");
 }
 
 
@@ -68,6 +63,7 @@ function garageScreen(){
   advancedViewButton.disabled = false;
   garageViewButton.disabled = true;
   loginViewButton.disabled = false;
+  hideLoading();
 
   //enables the navBar buttons
   //set all other screens to be display none
@@ -86,7 +82,23 @@ function advancedScreen(){
 
 
 
+function logout(){
+  userInfoTab.style.display = "none";
+  loginTab.style.display = "block";
+  garageTab.style.display = "none";
+  loginViewButton.innerHTML = "Login";
+  advancedTab.style.display = "none";
 
+  advancedViewButton.disabled = true;
+  garageViewButton.disabled = true;
+  loginViewButton.disabled = true;
+
+  loginButton.disabled = false;
+  createAccountButton.disabled = false;
+  confirmAccountButton.disabled = true;
+  newAccountSection.hidden = true;
+  cancelButton.disabled = true;
+}
 
 //------------   LOGIN SCREEN ITEMS ---------------//
 var loginControls
@@ -115,8 +127,6 @@ function passwordEntryStart(){
   setTimeout(passwordEntry, 1750);
   console.log("start password");
 }
-
-
 function accountCreation(){
   console.log("New Account")
   newAccountSection.style.visibility = "visible";
@@ -145,45 +155,276 @@ function cancelUser(){
 
 
 
+/////////////////////GARAGE MODEL BULLSHIT ////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+/////////////////////GARAGE MODEL BULLSHIT ////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+/////////////////////GARAGE MODEL BULLSHIT ////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+/////////////////////GARAGE MODEL BULLSHIT ////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+/////////////////////GARAGE MODEL BULLSHIT ////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
-var lightSwitch
-var lit = true
-var currentLight
 
 
-function lightSwitchFunc(){
-  var pic;
-  switch (lit){
+var myPicture = document.getElementById('myPicture')
+var garageDisplay
+
+var addBCgif = "./resources/pictures/gifs/BrightClosing.gif"
+var addDOgif = "./resources/pictures/gifs/DarkOpening.gif"
+var addDCgif = "./resources/pictures/gifs/DarkClosing.gif"
+var addBOgif = "./resources/pictures/gifs/BrightOpening.gif"
+
+var addBCpic = "./resources/pictures/DoorCloseLight.png"
+var addDOpic = "./resources/pictures/DoorOpenDark.png"
+var addDCpic = "./resources/pictures/DoorCloseDark.png"
+var addBOpic = "./resources/pictures/DoorOpenLight.png"
+
+var BCpic = new Image(src="./resources/pictures/DoorCloseLight.png");
+var BOpic = new Image(src="./resources/pictures/DoorOpenLight.png");
+var BOgif = new Image(src="./resources/pictures/gifs/BrightOpening.gif");
+
+var states = [
+  [addBCgif, addBCpic],
+  [addDOgif, addDOpic],
+  [addDCgif, addDCpic],
+  [addBOgif, addBOpic],
+];
+
+
+
+var onOff = "./resources/pictures/gifs/onOff.gif"
+var offOn = "./resources/pictures/gifs/offOn.gif"
+
+var on = "./resources/pictures/OnSwitch.jpg"
+var off = "./resources/pictures/OffSwitch.jpg"
+
+
+//update this after garage model or vise versa :)
+var lightSwitchModel = {
+  light: true,
+  switching: false,
+}
+
+function lightAffectGarage(){
+  //This changes the garageLightSettings!
+  //Called when lightSwitch is touched
+  console.log("Light -> Garage")
+  switch (lightSwitchModel.light){
+    case false:
+    GarageModel.light = true;
+    lightSwitchModel.light = true;
+    animateLightPic(offOn, on);
+    // setTimeout(function(){garagePicHandler;}, 1500);
+    break;
     case true:
-    document.getElementById('switchPic').style.display = "none";
-    document.getElementById('switchAnim').style.display = "block";
-    document.getElementById('switchAnim').src = "./resources/pictures/gifs/onOff.gif";
-    document.getElementById('switchAnim').style.display = "block";
-    lit = false;
-    currentLight = "./resources/pictures/OffSwitch.jpg";
-    setTimeout(animateLight, 1500);
+    //update both pictures!
+    GarageModel.light = false;
+    lightSwitchModel.light = false;
+    animateLightPic(onOff, off);
+    // setTimeout(function(){garagePicHandler;}, 1500);
+    break;
+  }
+}
+function garageAffectLight(){
+  console.log("Garage -> Light");
+  //This changes the garageLightSettings!
+  //Called when light is different from garageLight!
+  switch (GarageModel.light){
+    case true:
+    lightSwitchModel.light = true;
+    swapLightPic(on);
+    break;
+    case false:
+    lightSwitchModel.light = false;
+    swapLightPic(off);
+    break;
+  }
+}
+
+//This handles based on the caller, AKA where the light update is coming from!
+function lightChangeHandler(caller){
+  console.log("handler");
+  switch (caller){
+    case "garage":
+    console.log("caller: garage");
+    if(lightSwitchModel.light != GarageModel.light){
+      console.log("horseshit!");
+      garageAffectLight();
+    }
+    break;
+    case "buttonClick":
+    console.log("caller: button");
+    //if button calls it, need to update Garage one too!
+    lightAffectGarage();
+    break;
+  }
+}
+function animateLightPic(gif,newPic){
+  console.log("animating Light!")
+  document.getElementById('switchPic').style.display = "none";
+  document.getElementById('switchAnim').style.display = "block";
+  document.getElementById('switchAnim').src = gif;
+  document.getElementById('switchAnim').style.display = "block";
+  setTimeout(function(){swapLightPic(newPic); garagePicHandler();}, 1000);
+}
+function swapLightPic(picture){
+  document.getElementById('switchAnim').style.display = "none";
+  document.getElementById('switchPic').src = picture;
+  //document.getElementById('switchPic').src = this.currentPic;
+  document.getElementById('switchPic').style.display = "block";
+  console.log("newLightPic");
+  hideLoading();
+}
+function updateGarageLight(callback){
+  console.log("update Light");
+  switch(GarageModel.light){
+    case true:
+    setTimeout(updatePictures,100);
+    GarageModel.light = false;
     break;
 
     case false:
-    pic = addBCgif;
-    document.getElementById('switchPic').style.display = "none";
-    document.getElementById('switchAnim').style.display = "block";
-    document.getElementById('switchAnim').src = "./resources/pictures/gifs/offOn.gif";
-    document.getElementById('switchAnim').style.display = "block";
-    lit = true;
-    currentLight =  "./resources/pictures/OnSwitch.jpg";
-    setTimeout(animateLight, 1500);
+    setTimeout(updatePictures,100);
+    GarageModel.light = true;
     break;
+  }
+}
+function updateDoor(){
+  console.log("Updating door");
+  GarageModel.light = true;
+  switch(GarageModel.open){
+    case true:
+    console.log("Closing Door")
+    GarageModel.open = false;
+    document.getElementById("garageControlButton").innerHTML = "OPEN";
+    animateGarage(addBCgif,addBCpic);
+    break;
+    case false:
+    console.log("Opening Door")
+    GarageModel.open = true;
+    document.getElementById("garageControlButton").innerHTML = "CLOSE";
+    animateGarage(addBOgif,addBOpic);
+    break;
+  }
+  lightChangeHandler("garage");
+  console.log("afterwards");
+}
+
+function animateGarage(gif,newPic){
+  console.log("Animating Garage");
+  document.getElementById('myPicture').style.display = "none";
+  document.getElementById('myAnimation').style.display = "block";
+  document.getElementById('myAnimation').src = gif;
+  document.getElementById('myAnimation').style.display = "block";
+  console.log("lets wait!");
+  setTimeout(function(){ swapGaragePic(newPic);}, 1750);
+  console.log("doneWaiting!");
+}
+
+function garagePicHandler(){
+  console.log("GaragePicHandler!");
+  switch(GarageModel.open){
+    case true:
+    console.log("door open");
+    if(GarageModel.light){
+      swapGaragePic(addBOpic);
+    } else {
+      swapGaragePic(addDOpic);
+    }
+    break;
+    case false:
+    console.log("door close");
+    if(GarageModel.light){
+      swapGaragePic(addBCpic);
+    } else {
+      swapGaragePic(addDCpic);
+    }
+    break;
+  }
 
 }
+function swapGaragePic(picture){
+  document.getElementById('myAnimation').style.display = "none";
+  document.getElementById('myPicture').src = picture;
+  document.getElementById('myPicture').style.display = "block";
+  console.log("newGaragePic");
+  hideLoading();
 }
-function animateLight(){
-    document.getElementById('switchAnim').style.display = "none";
-    document.getElementById('switchPic').src = this.currentLight;
-    //document.getElementById('switchPic').src = this.currentPic;
-    document.getElementById('switchPic').style.display = "block";
-    console.log("Swapped!");
+
+
+
+// function picSwapper(){
+//   document.getElementById('myAnimation').style.display = "none";
+//   document.getElementById('myPicture').src = this.currentPic;
+//   //document.getElementById('myPicture').src = this.currentPic;
+//   document.getElementById('myPicture').style.display = "block";
+//   console.log("Swapped!");
+//   document.getElementById('garageControlButton').disabled = false;
+//   hideLoading();
+// }
+
+
+
+function loading(nextFunction){
+  console.log("loadingFunc");
+  document.getElementById("loadingIcon").style.display = 'block';
+  nextFunction();
+  console.log("loading done");
 }
+
+function hideLoading(){
+  console.log("hideLoading");
+  document.getElementById("loadingIcon").style.display = 'none';
+}
+
+
+
+
+
+/////////////////////ADVANCED TAB BOOLSHIT ////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+/////////////////////ADVANCED TAB BOOLSHIT ////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+/////////////////////ADVANCED TAB BOOLSHIT ////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+/////////////////////ADVANCED TAB BOOLSHIT ////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+/////////////////////ADVANCED TAB BOOLSHIT ////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+//VARIABLES
+var autoClose
+var closeTime
+var autoOff
+var offTime
+var brightness
+
+
+
+//FUNctions!
+function boolChecker(interest){
+  console.log(GarageModel[interest]);
+  if(GarageModel[interest]){
+    GarageModel[interest] = false;
+  } else {
+    GarageModel[interest] = true;
+  }
+}
+
+function rangeValues(dataSource){
+  console.log(dataSource.value);
+  var newValue = dataSource.value;
+  console.log(newValue);
+
+  GarageModel[dataSource] = newValue;
+  console.log(GarageModel[dataSource]);
+  console.log("range set!");
+}
+
+
+
 
 
 
@@ -192,6 +433,8 @@ function animateLight(){
 
 document.addEventListener("DOMContentLoaded", function(event) {
 
+  document.getElementById("loadingIcon").display = 'none';
+  document.getElementById("loadingIcon").style.display = 'none';
   document.getElementById("garageTab").style.display = 'none';
   document.getElementById("userInfo").style.display = 'none';
   document.getElementById("advancedTab").style.display = 'none';
@@ -202,82 +445,109 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
   //NavPanel
-    //Variables
-    loginTab = document.getElementById("loginTab")
-    garageTab = document.getElementById("garageTab")
-    userInfoTab = document.getElementById("userInfo")
-    advancedTab = document.getElementById("advancedTab")
-    loginViewButton = document.getElementById("loginViewButton")
-    garageViewButton = document.getElementById("garageViewButton")
-    advancedViewButton = document.getElementById("advancedViewButton")
+  //Variables
+  loginTab = document.getElementById("loginTab")
+  garageTab = document.getElementById("garageTab")
+  userInfoTab = document.getElementById("userInfo")
+  advancedTab = document.getElementById("advancedTab")
+  loginViewButton = document.getElementById("loginViewButton")
+  garageViewButton = document.getElementById("garageViewButton")
+  advancedViewButton = document.getElementById("advancedViewButton")
 
 
-    //Listeners
-    document.getElementById("loginViewButton").addEventListener("click", loginScreen)
-    document.getElementById("garageViewButton").addEventListener("click", garageScreen)
-    document.getElementById("advancedViewButton").addEventListener("click", advancedScreen)
+  //Listeners
+  document.getElementById("loginViewButton").addEventListener("click", loginScreen)
+  document.getElementById("garageViewButton").addEventListener("click", garageScreen)
+  document.getElementById("advancedViewButton").addEventListener("click", advancedScreen)
 
-    garageViewButton.disabled = true;
-    loginViewButton.disabled = true;
-    advancedViewButton.disabled = true;
+  garageViewButton.disabled = true;
+  loginViewButton.disabled = true;
+  advancedViewButton.disabled = true;
 
 
 
 
   //Login Screen
-    //Variables
-    loginControls = document.getElementById("login-Controls")
-    inputFields = document.getElementById("login-Fields")
-
-    username = document.getElementById("username")
-    password = document.getElementById("yourPassword")
-
-    createAccountButton = document.getElementById("newUserButton")
-    loginButton = document.getElementById("loginButton")
-
-
-    //Listeners
-    document.getElementById("newUserButton").addEventListener("click", accountCreation)
-    document.getElementById("yourPassword").addEventListener("blur", passwordEntry)
-    document.getElementById("yourPassword").addEventListener("click", passwordEntryStart)
-    document.getElementById("loginButton").addEventListener("click", garageScreen)
-
-  //New Account
-    //Variables
-    newUser = document.getElementById("chooseUsername")
-    newPassword = document.getElementById("firstPassword")
-    validPassword = document.getElementById("secondPassword")
-    newEmail = document.getElementById("yourEmail")
-    newAccount = document.getElementById("newAccount")
-    newAccountSection = document.getElementById("newAccountSection")
-
-    confirmAccountButton = document.getElementById("createAccountButton")
-    cancelButton = document.getElementById("returnToLogin")
-
-    //Listeners
-    document.getElementById("createAccountButton").addEventListener("click", accountConfirmation)
-    document.getElementById("firstPassword").addEventListener("blur", passwordValidation)
-    document.getElementById("secondPassword").addEventListener("blur", passwordValidation)
-    document.getElementById("yourEmail").addEventListener("blur", emailValidation)
-    document.getElementById("yourEmail").addEventListener("change", emailValidation)
-    document.getElementById("returnToLogin").addEventListener("click", cancelUser)
-
-
-
-//Garage Screen
   //Variables
-  lightSwitch = document.getElementById("switchPic")
+  loginControls = document.getElementById("login-Controls")
+  inputFields = document.getElementById("login-Fields")
+
+  username = document.getElementById("username")
+  password = document.getElementById("yourPassword")
+
+  createAccountButton = document.getElementById("newUserButton")
+  loginButton = document.getElementById("loginButton")
+
 
   //Listeners
-  document.getElementById("switchPic").addEventListener("click", lightSwitchFunc)
+  document.getElementById("newUserButton").addEventListener("click", accountCreation)
+  document.getElementById("yourPassword").addEventListener("blur", passwordEntry)
+  document.getElementById("yourPassword").addEventListener("click", passwordEntryStart)
+  //document.getElementById("loginButton").addEventListener("click", garageScreen)
+  document.getElementById("loginButton").addEventListener("click",  function(){loading(login);})
+  document.getElementById("logoutButton").addEventListener("click", logout)
+
+
+
+  //New Account
+  //Variables
+  newUser = document.getElementById("chooseUsername")
+  newPassword = document.getElementById("firstPassword")
+  validPassword = document.getElementById("secondPassword")
+  newEmail = document.getElementById("yourEmail")
+  newAccount = document.getElementById("newAccount")
+  newAccountSection = document.getElementById("newAccountSection")
+
+  confirmAccountButton = document.getElementById("createAccountButton")
+  cancelButton = document.getElementById("returnToLogin")
+
+  //Listeners
+  document.getElementById("createAccountButton").addEventListener("click", accountConfirmation)
+  document.getElementById("firstPassword").addEventListener("blur", passwordValidation)
+  document.getElementById("secondPassword").addEventListener("blur", passwordValidation)
+  document.getElementById("yourEmail").addEventListener("blur", emailValidation)
+  document.getElementById("yourEmail").addEventListener("change", emailValidation)
+  document.getElementById("returnToLogin").addEventListener("click", cancelUser)
+
+
+  //Garage Screen
+  //Variables
+  lightSwitch = document.getElementById("switchPic")
+  myPicture = document.getElementById("myPicture")
+  garageDisplay = document.getElementById("garageDisplay")
+  //Listeners
+  document.getElementById("switchPic").addEventListener("click", function(){ loading( function(){lightChangeHandler("buttonClick")})})
+  document.getElementById("garageControlButton").addEventListener("click", function(){loading(updateDoor);})
+  document.getElementById("myAnimation").style.display = "none";
+
+
+  //ADVANCED SCREEN
+
+  //variables
+  autoClose = document.getElementById("autoClose")
+  closeTime = document.getElementById("closeTimeout")
+  autoOff = document.getElementById("autoOff")
+  offTime = document.getElementById("offTimeout")
+  brightness = document.getElementById("mySlider")
+
+  //listeners
+  document.getElementById("autoClose").addEventListener("click", function(){boolChecker("autoCloseEnabled");})
+  document.getElementById("autoOff").addEventListener("click", function(){boolChecker("autoOffEnabled");})
+
+  document.getElementById("closeTimeout").addEventListener("change", function(){rangeValues(closeTime);})
+  document.getElementById("offTimeout").addEventListener("change", function(){rangeValues(offTime);})
+  document.getElementById("mySlider").addEventListener("change", function(){rangeValues(brightness);})
+
+
+
 
   // // Getting the initial state
-console.log("Getting Initial State")
+  console.log("Getting Initial State")
 
 
-newAccountSection.style.visibility = "hidden"
+  newAccountSection.style.visibility = "hidden";
 
-document.getElementById("switchAnim").style.display = 'none';
+  document.getElementById("switchAnim").style.display = 'none';
 
 
   //newAccountSection.display = none;
