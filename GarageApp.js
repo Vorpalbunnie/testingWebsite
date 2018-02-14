@@ -276,6 +276,11 @@ function swapLightPic(picture){
   document.getElementById('switchPic').style.display = "block";
   console.log("newLightPic");
   hideLoading();
+
+  if(GarageModel.light && GarageModel.autoOffEnabled){
+      console.log("Light On AND Auto Off Enabled!");
+      startTimer('offTime');
+  }
 }
 function updateGarageLight(callback){
   console.log("update Light");
@@ -294,32 +299,35 @@ function updateGarageLight(callback){
 function updateDoor(){
   console.log("Updating door");
   GarageModel.light = true;
+
   switch(GarageModel.open){
     case true:
     console.log("Closing Door")
     GarageModel.open = false;
     document.getElementById("garageControlButton").innerHTML = "OPEN";
     animateGarage(addBCgif,addBCpic);
+    lightChangeHandler("garage");
     break;
     case false:
     console.log("Opening Door")
     GarageModel.open = true;
     document.getElementById("garageControlButton").innerHTML = "CLOSE";
     animateGarage(addBOgif,addBOpic);
+    lightChangeHandler("garage");
     break;
   }
-  lightChangeHandler("garage");
-  console.log("afterwards");
 }
 
 function animateGarage(gif,newPic){
   console.log("Animating Garage");
+  console.log(gif);
+  console.log(newPic);
   document.getElementById('myPicture').style.display = "none";
   document.getElementById('myAnimation').style.display = "block";
   document.getElementById('myAnimation').src = gif;
-  document.getElementById('myAnimation').style.display = "block";
+
   console.log("lets wait!");
-  setTimeout(function(){ swapGaragePic(newPic);}, 1750);
+  setTimeout(function(){swapGaragePic(newPic);}, 1750);
   console.log("doneWaiting!");
 }
 
@@ -351,9 +359,39 @@ function swapGaragePic(picture){
   document.getElementById('myPicture').style.display = "block";
   console.log("newGaragePic");
   hideLoading();
+
+  if(GarageModel.open && GarageModel.autoCloseEnabled){
+      console.log("Door Open and Auto Close Enabled!");
+        startTimer(closeTime);
+  }
 }
 
 
+function startTimer(object){
+  //this works!
+
+  var timeValue = GarageModel[object];
+  console.log(timeValue);
+  setTimeout(function(){shutOff(object);}, this.timeValue);
+}
+
+
+function shutOff(object){
+  console.log("TURN OFF");
+  console.log(object);
+  switch (object){
+    case "offTime":
+    console.log("switch statement offTime");
+    if(GarageModel.light){
+      lightChangeHandler('buttonClick');
+    }
+    break;
+    case "closeTime":
+    console.log("switch statement closeTime");
+    loading(updateDoor);
+    break;
+  }
+}
 
 // function picSwapper(){
 //   document.getElementById('myAnimation').style.display = "none";
@@ -368,6 +406,7 @@ function swapGaragePic(picture){
 
 
 function loading(nextFunction){
+  document.getElementById('garageControlButton').disabled = true;
   console.log("loadingFunc");
   document.getElementById("loadingIcon").style.display = 'block';
   nextFunction();
@@ -375,6 +414,7 @@ function loading(nextFunction){
 }
 
 function hideLoading(){
+  document.getElementById('garageControlButton').disabled = false;
   console.log("hideLoading");
   document.getElementById("loadingIcon").style.display = 'none';
 }
@@ -417,7 +457,6 @@ function rangeValues(dataSource){
   console.log(dataSource.value);
   var newValue = dataSource.value;
   console.log(newValue);
-
   GarageModel[dataSource] = newValue;
   console.log(GarageModel[dataSource]);
   console.log("range set!");
