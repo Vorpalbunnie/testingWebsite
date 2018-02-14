@@ -1,3 +1,5 @@
+
+
 function wait(timeInSeconds) {
   var start = Date.now();
   var endTime = start + timeInSeconds*1000;
@@ -98,6 +100,10 @@ function logout(){
 }
 
 //------------   LOGIN SCREEN ITEMS ---------------//
+//------------   LOGIN SCREEN ITEMS ---------------//
+//------------   LOGIN SCREEN ITEMS ---------------//
+//------------   LOGIN SCREEN ITEMS ---------------//
+
 var loginControls
 var inputFields
 
@@ -211,28 +217,7 @@ function accountConfirmation(){
       newAccountSection.hidden = true;
       cancelButton.disabled = true;
     }
-  // if(passwordsMatch){
-  //   userInfo.setHandler('password', newPassword.value);
-  //   userInfo.setHandler('userName', newUser.value);
-  //
-  //   password.value = newPassword.value;
-  //   username.value = newUser.value;
-  //
-  //   newPassword.value = "";
-  //   newEmail.value = "";
-  //   validPassword.value = "";
-  //   newUser.value = "";
-  //
-  //
-  //   newAccountSection.style.visibility = "hidden";
-  //   loginButton.disabled = false;
-  //   createAccountButton.disabled = false;
-  //   confirmAccountButton.disabled = true;
-  //   newAccountSection.hidden = true;
-  //   cancelButton.disabled = true;
-  // } else {
-  //   alert("Re-enter passwords!");
-  // }
+
 
 }
 function cancelUser(){
@@ -304,6 +289,13 @@ var lightSwitchModel = {
   light: true,
   switching: false,
 }
+
+
+////////////////////////////////////FUNCTIONS////////////////////////////////////
+////////////////////////////////////FUNCTIONS////////////////////////////////////
+////////////////////////////////////FUNCTIONS////////////////////////////////////
+////////////////////////////////////FUNCTIONS////////////////////////////////////
+////////////////////////////////////FUNCTIONS////////////////////////////////////
 
 function lightAffectGarage(){
   //This changes the garageLightSettings!
@@ -471,8 +463,10 @@ function swapGaragePic(picture){
 }
 
 
-//this doesnt work when passed from functions. The time is set to 0....
-//but not when i print it manually....T-T
+////////////////////////////////////TIMING////////////////////////////////////
+////////////////////////////////////TIMING////////////////////////////////////
+////////////////////////////////////TIMING////////////////////////////////////
+////////////////////////////////////TIMING////////////////////////////////////
 function startTimer(object){
   //this works!
   var timeValue = GarageModel.getHandler(object);
@@ -595,12 +589,16 @@ function isKeyPressed(event) {
 }
 
 
-//ATTEMPT
+//ATTEMPT to emulate console on the screen (for debug mode)
 function consoleWrapper(string){
   document.getElementById("debuggler1").innerHTML = "prev: " + document.getElementById("debuggler").innerHTML;
   document.getElementById("debuggler").innerHTML = string;
   console.log(string);
 }
+
+
+
+
 
 ////////////////////////////////////ON LOADING////////////////////////////////////
 ////////////////////////////////////ON LOADING////////////////////////////////////
