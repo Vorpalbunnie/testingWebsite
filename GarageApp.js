@@ -367,6 +367,8 @@ function swapGaragePic(picture){
 }
 
 
+//this doesnt work when passed from functions. The time is set to 0....
+//but not when i print it manually....T-T
 function startTimer(object){
   //this works!
 
