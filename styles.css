@@ -31,7 +31,6 @@ table{
 }
 
 h1 {
-  /*font-size: 36px; /* Some tweener fallback that doesn't look awful */*/
   font-size: 4.0vw;
 }
 
@@ -139,8 +138,6 @@ width: 50%;
 }
 
 
-
-
 #switchPic, #switchAnim{
   margin:auto;
 }
@@ -187,6 +184,7 @@ clickable links
 
 .mySlidey{
   width: 90%;
+  height:100%;
   margin: auto;
 }
 
@@ -271,4 +269,33 @@ clickable links
   height: 100%;
   background-color: rgba(0,0,0,0);
 
+}
+
+.sneakyButton{
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 1vh;
+  opacity: 0.5;
+  height: 4vh;
+
+}
+
+.debugHolder{
+  pointer-events: none;
+  margin-top: 4.0vw;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  position: fixed;
+}
+#debuggler1{
+  font-size: 4.0vw;
+  pointer-events: none;
+  opacity: 0.4;
+}
+#debuggler{
+  font-size: 4.0vw;
+  pointer-events: none;
+  opacity: 0.4;
 }

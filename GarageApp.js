@@ -7,25 +7,17 @@ function wait(timeInSeconds) {
 
 
 
+/////////////////////USER INFO BOOLSHIT ////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+/////////////////////USER INFO BOOLSHIT ////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+/////////////////////USER INFO BOOLSHIT ////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+/////////////////////USER INFO BOOLSHIT ////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+/////////////////////USER INFO BOOLSHIT ////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
-function passwordValidation(){
-  if(newPassword.value != document.getElementById("secondPassword").value){
-    confirmAccountButton.disabled = true;
-  } else {
-    confirmAccountButton.disabled = false;
-  }
-}
-
-function emailValidation(){
-  /* no clue lol */
-}
-
-
-
-function login(){
-  console.log("stateChange(pepsi)");
-  setTimeout(garageScreen, 100);
-}
 
 function pepsi(){
   console.log("PEPSI MAN!!!!");
@@ -45,7 +37,10 @@ var advancedViewButton
 function loginScreen(){
   //When changing back, display current username and email?
   //with a logout button!
+
   userInfoTab.style.display = "block";
+  document.getElementById('theUser').innerHTML = userInfo.getHandler('userName');
+  document.getElementById('theEmail').innerHTML = userInfo.getHandler('emailAddress');
   garageViewButton.disabled = false;
   loginViewButton.disabled = true;
   advancedViewButton.disabled = false;
@@ -89,6 +84,8 @@ function logout(){
   loginViewButton.innerHTML = "Login";
   advancedTab.style.display = "none";
 
+  username.value = "";
+  password.value = "";
   advancedViewButton.disabled = true;
   garageViewButton.disabled = true;
   loginViewButton.disabled = true;
@@ -104,7 +101,7 @@ function logout(){
 var loginControls
 var inputFields
 
-
+var newUser
 var newPassword
 var validPassword
 var newEmail
@@ -112,21 +109,40 @@ var newAccount
 var newAccountSection
 var confirmAccountButton
 var cancelButton
+var validEmail
 
 var username
 var password
 var createAccountButton
 var loginButton
 
+var isEmail = false;
+var passwordsMatch = false;
+
+function login(){
+  if(username.value == userInfo.getHandler('userName')){
+    if(password.value == userInfo.getHandler('password')){
+      consoleWrapper("Login Success");
+      userInfo.setHandler('userName', username.value);
+      setTimeout(garageScreen, 100);
+    }
+  } else {
+    consoleWrapper("login fail");
+    alert("Invalid Info! Use ADMIN for both or create a new account");
+    hideLoading();
+  }
+}
+
 function passwordEntry(){
-  console.log("passwordEdit");
   password.type = "password";
 }
+
 function passwordEntryStart(){
   password.type = "text";
   setTimeout(passwordEntry, 1750);
   console.log("start password");
 }
+
 function accountCreation(){
   console.log("New Account")
   newAccountSection.style.visibility = "visible";
@@ -135,16 +151,97 @@ function accountCreation(){
   confirmAccountButton.disabled = false;
   cancelButton.disabled = false;
 }
+
+function passwordValidation(){
+  if(newPassword.value == validPassword.value){
+    passwordsMatch = true;
+    console.log("setting password!");
+  }
+}
+
+function emailValidation(){
+  if(newEmail.value.indexOf("@") > -1){
+    console.log("its an email!");
+    userInfo.setHandler('emailAddress', newEmail.value);
+    isEmail = true;
+  } else {
+    console.log("not an email!");
+    isEmail = false;
+  }
+}
+
 function accountConfirmation(){
-  console.log("account confirmed buddy")
-  newAccountSection.style.visibility = "hidden";
-  loginButton.disabled = false;
-  createAccountButton.disabled = false;
-  confirmAccountButton.disabled = true;
-  newAccountSection.hidden = true;
-  cancelButton.disabled = true;
+  consoleWrapper("accountConfirmation");
+  console.log("account confirmed buddy");
+  console.log(passwordsMatch);
+  var passCheck = true;
+  var userCheck = true;
+  var emailCheck = true;
+
+  if(!passwordsMatch){
+    passCheck = false;
+    alert("Passwords don't match!");
+  }
+  if(newUser.value == "" ){
+    userCheck = false;
+    alert("Enter a username!");
+  }
+  if(!isEmail){
+    emailCheck = false;
+    alert("Please enter a valid email address");
+  }
+  if(passCheck && userCheck && emailCheck){
+      consoleWrapper("PassConfirmCheck");
+      userInfo.setHandler('password', newPassword.value);
+      userInfo.setHandler('userName', newUser.value);
+
+      password.value = newPassword.value;
+      username.value = newUser.value;
+
+      newPassword.value = "";
+      newEmail.value = "";
+      validPassword.value = "";
+      newUser.value = "";
+
+
+      newAccountSection.style.visibility = "hidden";
+      loginButton.disabled = false;
+      createAccountButton.disabled = false;
+      confirmAccountButton.disabled = true;
+      newAccountSection.hidden = true;
+      cancelButton.disabled = true;
+    }
+  // if(passwordsMatch){
+  //   userInfo.setHandler('password', newPassword.value);
+  //   userInfo.setHandler('userName', newUser.value);
+  //
+  //   password.value = newPassword.value;
+  //   username.value = newUser.value;
+  //
+  //   newPassword.value = "";
+  //   newEmail.value = "";
+  //   validPassword.value = "";
+  //   newUser.value = "";
+  //
+  //
+  //   newAccountSection.style.visibility = "hidden";
+  //   loginButton.disabled = false;
+  //   createAccountButton.disabled = false;
+  //   confirmAccountButton.disabled = true;
+  //   newAccountSection.hidden = true;
+  //   cancelButton.disabled = true;
+  // } else {
+  //   alert("Re-enter passwords!");
+  // }
+
 }
 function cancelUser(){
+  consoleWrapper("cancelUser");
+  newPassword.value = "";
+  newEmail.value = "";
+  validPassword.value = "";
+  newUser.value = "";
+
   newAccountSection.style.visibility = "hidden";
   loginButton.disabled = false;
   createAccountButton.disabled = false;
@@ -152,6 +249,7 @@ function cancelUser(){
   newAccountSection.hidden = true;
   cancelButton.disabled = true;
 }
+
 
 
 
@@ -210,7 +308,7 @@ var lightSwitchModel = {
 function lightAffectGarage(){
   //This changes the garageLightSettings!
   //Called when lightSwitch is touched
-  console.log("Light -> Garage")
+  cconsoleWrapper("Light -> Garage");
   switch (lightSwitchModel.light){
     case false:
     GarageModel.setHandler("light", true);
@@ -228,7 +326,7 @@ function lightAffectGarage(){
   }
 }
 function garageAffectLight(){
-  console.log("Garage -> Light");
+  consoleWrapper("Garage -> Light");
   //This changes the garageLightSettings!
   //Called when light is different from garageLight!
   switch (GarageModel.getHandler('light')){
@@ -287,6 +385,7 @@ function swapLightPic(picture){
 }
 function updateGarageLight(callback){
   console.log("update Light");
+  consoleWrapper("Updating LightGarage");
   switch(GarageModel.getHandler('light')){
     case true:
     setTimeout(updatePictures,100);
@@ -301,6 +400,7 @@ function updateGarageLight(callback){
 }
 function updateDoor(){
   console.log("Updating door");
+  consoleWrapper("Updating Door");
   GarageModel.setHandler("light", true);
 
   switch(GarageModel.getHandler('open')){
@@ -400,16 +500,6 @@ function shutOff(object){
   }
 }
 
-// function picSwapper(){
-//   document.getElementById('myAnimation').style.display = "none";
-//   document.getElementById('myPicture').src = this.currentPic;
-//   //document.getElementById('myPicture').src = this.currentPic;
-//   document.getElementById('myPicture').style.display = "block";
-//   console.log("Swapped!");
-//   document.getElementById('garageControlButton').disabled = false;
-//   hideLoading();
-// }
-
 
 
 function loading(nextFunction){
@@ -450,22 +540,8 @@ var autoOff
 var offTime
 var brightness
 
-
-
-//FUNctions!
-// function boolChecker(button,interest){
-//   console.log(GarageModel[interest]);
-//   if(GarageModel[interest]){
-//     GarageModel[interest] = false;
-//     document.getElementById(button).innerHTML = "ENABLE" + button;
-//   } else {
-//     GarageModel[interest] = true;
-//     document.getElementById(button).innerHTML = "DISABLE " + button;
-//   }
-// }
-
 function boolChecker(button,interest){
-  console.log(GarageModel.getHandler(interest));
+  consoleWrapper(GarageModel.getHandler(interest));
   switch(GarageModel.getHandler(interest)){
     case true:
     GarageModel.setHandler(interest, false);
@@ -479,12 +555,12 @@ function boolChecker(button,interest){
 }
 
 function rangeValues(dataSource, interest){
+  consoleWrapper("Range Adjusted!")
+  consoleWrapper(dataSource)
   console.log(dataSource.value);
   var newValue = dataSource.value;
   console.log(newValue);
-
   GarageModel.setHandler(interest,newValue);
-
   //GarageModel[interest] = newValue;
   console.log(GarageModel[dataSource]);
   console.log("range set!");
@@ -495,8 +571,30 @@ function rangeValues(dataSource, interest){
 
 
 
+function createMessage(str) {
+  var newMessage = document.createElement('li').innerHTML = str;
+  var list = document.getElementById("list");
+  list.insertBefore(newNode, list.childNodes[0]);
+}
+
+function isKeyPressed(event) {
+    var x = document.getElementById("something");
+    if (event.shiftKey) {
+        console.log("DEBUG MODE ENABLED");
+        document.getElementById("debuggler").style.display = "block";
+        document.getElementById("debuggler1").style.display = "block";
+    } else {
+        console.log("The SHIFT key was NOT pressed!");
+    }
+}
 
 
+//ATTEMPT
+function consoleWrapper(string){
+  document.getElementById("debuggler1").innerHTML = "prev: " + document.getElementById("debuggler").innerHTML;
+  document.getElementById("debuggler").innerHTML = string;
+  console.log(string);
+}
 
 
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -539,10 +637,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
   //Variables
   loginControls = document.getElementById("login-Controls")
   inputFields = document.getElementById("login-Fields")
-
   username = document.getElementById("username")
   password = document.getElementById("yourPassword")
-
   createAccountButton = document.getElementById("newUserButton")
   loginButton = document.getElementById("loginButton")
 
@@ -552,12 +648,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
   document.getElementById("yourPassword").addEventListener("blur", passwordEntry)
   document.getElementById("yourPassword").addEventListener("click", passwordEntryStart)
   //document.getElementById("loginButton").addEventListener("click", garageScreen)
+
   document.getElementById("loginButton").addEventListener("click",  function(){loading(login);})
   document.getElementById("logoutButton").addEventListener("click", logout)
 
 
 
   //New Account
+
   //Variables
   newUser = document.getElementById("chooseUsername")
   newPassword = document.getElementById("firstPassword")
@@ -571,14 +669,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   //Listeners
   document.getElementById("createAccountButton").addEventListener("click", accountConfirmation)
+
   document.getElementById("firstPassword").addEventListener("blur", passwordValidation)
   document.getElementById("secondPassword").addEventListener("blur", passwordValidation)
-  document.getElementById("yourEmail").addEventListener("blur", emailValidation)
   document.getElementById("yourEmail").addEventListener("change", emailValidation)
   document.getElementById("returnToLogin").addEventListener("click", cancelUser)
 
 
   //Garage Screen
+
   //Variables
   lightSwitch = document.getElementById("switchPic")
   myPicture = document.getElementById("myPicture")
@@ -601,7 +700,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
   //listeners
   document.getElementById("autoClose").addEventListener("click", function(){boolChecker("autoClose","autoCloseEnabled");})
   document.getElementById("autoOff").addEventListener("click", function(){boolChecker("autoOff","autoOffEnabled");})
-
   document.getElementById("closeTimeout").addEventListener("change", function(){rangeValues(closeTime, 'closeTimeDuration');})
   document.getElementById("offTimeout").addEventListener("change", function(){rangeValues(offTime, 'offTimeDuration');})
   document.getElementById("mySlider").addEventListener("change", function(){rangeValues(brightness, 'brightness');})
@@ -616,7 +714,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
   newAccountSection.style.visibility = "hidden";
 
   document.getElementById("switchAnim").style.display = 'none';
+  document.getElementById("debuggler").style.display = 'none';
+  document.getElementById("debuggler1").style.display = 'none';
 
+  document.getElementById("something").addEventListener("click", isKeyPressed);
 
   //newAccountSection.display = none;
 })

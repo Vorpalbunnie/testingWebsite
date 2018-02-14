@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="styles.css">
 	<script src="./GarageApp.js"></script>
 	<script src="./GarageModel.js"></script>
+	<script src="./userInfo.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 
@@ -23,6 +24,10 @@
 	<div class="imageWrapper">
 		<img id="loadingIcon" class="overlayImage" src="./resources/pictures/gifs/loading.gif">
 	</div>
+
+<button id="something" class="sneakyButton"> DEBUG </button>
+<div class="debugHolder"> <p id ="debuggler"></p>
+<p id ="debuggler1"></p></div>
 
 	<div id="headerPanel" class="NavPanel">
 		<div class="col span_1_of_3">
@@ -92,8 +97,9 @@
 <div class="page-content" id="userInfo"
 <div class="col span_3_of_3" id="userInfoStrings">
 	<h1> HEY ITS YOU NICE </h1><br>
-	<h1>THIS IS YOUR EMAIL MATE </h1>
-
+	<h1>THIS IS YOUR EMAIL MATE</h1>
+	<h1 id="theUser" class="label"></h1>
+	<h1 id="theEmail" class="label"></h1>
 	<button id="logoutButton" class="testButton">
 		LOGOUT
 	</button>
@@ -164,9 +170,6 @@
 			<label id="brightThing" value="Current Brightness"></label>
 		</div>
 	</div>
-
-
-
 </section>
 
 
