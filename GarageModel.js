@@ -25,6 +25,7 @@ var GarageModel = {
   stateChangeListener: true,
 
   getHandler: function(desired){
+    console.log("getHandler");
     switch(desired){
       case 'offTimeDuration':
       return this.getoffTimeDuration();
@@ -34,39 +35,102 @@ var GarageModel = {
       break;
       case 'brightness':
       return this.getBrightness();
-
+      break;
+      case 'light':
+      return this.getLight();
+      break;
+      case 'open':
+      return this.getOpen();
+      break;
+      case 'opening':
+      return this.getOpening();
+      break;
+      case 'autoCloseEnabled':
+      console.log("autoCloseEnabled");
+      return this.getAutoCloseEnabled();
+      break;
+      case 'autoOffEnabled':
+      return this.getAutoOffEnabled();
+      break;
     }
-
   },
-
   getoffTimeDuration: function(){
     return this.offTimeDuration;
   },
-
   getCloseTimeDuration: function(){
     return this.closeTimeDuration;
   },
-
   getBrightness: function(){
     return this.brightness;
   },
+  getOpen: function(){
+    return this.open;
+  },
+  getLight: function(){
+    return this.light;
+  },
+  getOpening: function(){
+    return this.opening;
+  },
+  getAutoOffEnabled: function(){
+    return this.autoOffEnabled;
+  },
+  getAutoCloseEnabled: function(){
+    return this.autoCloseEnabled;
+  },
 
-  stateChange: function(callback) {
-      var callingObject = this;
-      console.log("stateChange");
-      if(callingObject.stateChangeListener) {
-        var state = { openState:this.openState,
-                      open:this.open,
-                      light:this.light,
-                      opening:this.opening,
-                      brightness:this.brightness,
-                      autoOffEnabled:this.autoOffEnabled,
-                      autoCloseEnabled:this.autoCloseEnabled};
-                      //calls whatever function was "passed" to it!
-        setTimeout(callback(), 100);
-        console.log("afterCallback");
-      }
+  setHandler: function(desired, value){
+    switch(desired){
+      case 'offTimeDuration':
+      this.setOffTimeDuration(value);
+      break;
+      case 'closeTimeDuration':
+      this.setCloseTimeDuration(value);
+      break;
+      case 'brightness':
+      this.setBrightness(value);
+      case 'light':
+      this.setLight(value);
+      break;
+      case 'open':
+      this.setOpen(value);
+      break;
+      case 'opening':
+      this.setOpening(value);
+      break;
+      case 'autoCloseEnabled':
+      this.setAutoCloseEnabled(value);
+      break;
+      case 'autoOffEnabled':
+      this.setAutoOffEnabled(value);
+      break;
     }
+  },
+
+  setoffTimeDuration: function(value){
+    this.offTimeDuration = value;
+  },
+  setCloseTimeDuration: function(value){
+    this.closeTimeDuration = value;
+  },
+  setBrightness: function(value){
+    this.brightness = value;
+  },
+  setOpen: function(value){
+    this.open = value;
+  },
+  setLight: function(value){
+    this.light = value;
+  },
+  setOpening: function(value){
+    this.opening = value;
+  },
+  setAutoOffEnabled: function(value){
+    this.autoOffEnabled = value;
+  },
+  setAutoCloseEnabled: function(value){
+    this.autoCloseEnabled = value;
+  },
 
 }
 

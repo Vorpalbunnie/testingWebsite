@@ -213,14 +213,14 @@ function lightAffectGarage(){
   console.log("Light -> Garage")
   switch (lightSwitchModel.light){
     case false:
-    GarageModel.light = true;
+    GarageModel.setHandler("light", true);
     lightSwitchModel.light = true;
     animateLightPic(offOn, on);
-    // setTimeout(function(){garagePicHandler;}, 1500);
+    // setTimeout(function(){garagePicHandGaraler;}, 1500);
     break;
     case true:
     //update both pictures!
-    GarageModel.light = false;
+    GarageModel.setHandler("light", false);
     lightSwitchModel.light = false;
     animateLightPic(onOff, off);
     // setTimeout(function(){garagePicHandler;}, 1500);
@@ -231,7 +231,7 @@ function garageAffectLight(){
   console.log("Garage -> Light");
   //This changes the garageLightSettings!
   //Called when light is different from garageLight!
-  switch (GarageModel.light){
+  switch (GarageModel.getHandler('light')){
     case true:
     lightSwitchModel.light = true;
     swapLightPic(on);
@@ -249,7 +249,7 @@ function lightChangeHandler(caller){
   switch (caller){
     case "garage":
     console.log("caller: garage");
-    if(lightSwitchModel.light != GarageModel.light){
+    if(lightSwitchModel.light != GarageModel.getHandler('light')){
       console.log("horseshit!");
       garageAffectLight();
     }
@@ -277,43 +277,43 @@ function swapLightPic(picture){
   console.log("newLightPic");
   hideLoading();
 
-if(!GarageModel.opening){
-  if(GarageModel.light && GarageModel.autoOffEnabled){
+  if(!GarageModel.getHandler('opening')){
+    if(GarageModel.getHandler('light') && GarageModel.getHandler('autoOffEnabled')){
       console.log("Light On AND Auto Off Enabled!");
       startTimer('offTimeDuration');
+    }
   }
-}
 
 }
 function updateGarageLight(callback){
   console.log("update Light");
-  switch(GarageModel.light){
+  switch(GarageModel.getHandler('light')){
     case true:
     setTimeout(updatePictures,100);
-    GarageModel.light = false;
+    GarageModel.setHandler("light", false);
     break;
 
     case false:
     setTimeout(updatePictures,100);
-    GarageModel.light = true;
+    GarageModel.setHandler("light", true);
     break;
   }
 }
 function updateDoor(){
   console.log("Updating door");
-  GarageModel.light = true;
+  GarageModel.setHandler("light", true);
 
-  switch(GarageModel.open){
+  switch(GarageModel.getHandler('open')){
     case true:
     console.log("Closing Door")
-    GarageModel.open = false;
+    GarageModel.setHandler("open", false);
     document.getElementById("garageControlButton").innerHTML = "OPEN";
     animateGarage(addBCgif,addBCpic);
     lightChangeHandler("garage");
     break;
     case false:
     console.log("Opening Door")
-    GarageModel.open = true;
+    GarageModel.setHandler("open", true);
     document.getElementById("garageControlButton").innerHTML = "CLOSE";
     animateGarage(addBOgif,addBOpic);
     lightChangeHandler("garage");
@@ -336,10 +336,11 @@ function animateGarage(gif,newPic){
 
 function garagePicHandler(){
   console.log("GaragePicHandler!");
-  switch(GarageModel.open){
+  switch(GarageModel.getHandler('open')){
     case true:
     console.log("door open");
-    if(GarageModel.light){
+    //why do i have these if statements?
+    if(GarageModel.getHandler('light')){
       swapGaragePic(addBOpic);
     } else {
       swapGaragePic(addDOpic);
@@ -347,7 +348,7 @@ function garagePicHandler(){
     break;
     case false:
     console.log("door close");
-    if(GarageModel.light){
+    if(GarageModel.getHandler('light')){
       swapGaragePic(addBCpic);
     } else {
       swapGaragePic(addDCpic);
@@ -363,9 +364,9 @@ function swapGaragePic(picture){
   console.log("newGaragePic");
   hideLoading();
 
-  if(GarageModel.open && GarageModel.autoCloseEnabled){
-      console.log("Door Open and Auto Close Enabled!");
-        startTimer('closeTimeDuration');
+  if(GarageModel.getHandler('open') && GarageModel.getHandler('autoCloseEnabled')){
+    console.log("Door Open and Auto Close Enabled!");
+    startTimer('closeTimeDuration');
   }
 }
 
@@ -386,10 +387,12 @@ function shutOff(object){
   switch (object){
     case "offTimeDuration":
     console.log("switch statement offTime");
-    if(GarageModel.light){
+    if(GarageModel.getHandler('light')){
+      console.log("SHUT OFF TRUE");
       lightChangeHandler('buttonClick');
     }
     break;
+
     case "closeTimeDuration":
     console.log("switch statement closeTime");
     loading(updateDoor);
@@ -413,13 +416,13 @@ function loading(nextFunction){
   document.getElementById('garageControlButton').disabled = true;
   console.log("loadingFunc");
   document.getElementById("loadingIcon").style.display = 'block';
-  GarageModel.opening = true;
+  GarageModel.setHandler("opening", true);
   nextFunction();
   console.log("loading done");
 }
 
 function hideLoading(){
-  GarageModel.opening = false;
+  GarageModel.setHandler("opening", false);
   document.getElementById('garageControlButton').disabled = false;
   console.log("hideLoading");
   document.getElementById("loadingIcon").style.display = 'none';
@@ -450,14 +453,28 @@ var brightness
 
 
 //FUNctions!
+// function boolChecker(button,interest){
+//   console.log(GarageModel[interest]);
+//   if(GarageModel[interest]){
+//     GarageModel[interest] = false;
+//     document.getElementById(button).innerHTML = "ENABLE" + button;
+//   } else {
+//     GarageModel[interest] = true;
+//     document.getElementById(button).innerHTML = "DISABLE " + button;
+//   }
+// }
+
 function boolChecker(button,interest){
-  console.log(GarageModel[interest]);
-  if(GarageModel[interest]){
-    GarageModel[interest] = false;
+  console.log(GarageModel.getHandler(interest));
+  switch(GarageModel.getHandler(interest)){
+    case true:
+    GarageModel.setHandler(interest, false);
     document.getElementById(button).innerHTML = "ENABLE" + button;
-  } else {
-    GarageModel[interest] = true;
+    break;
+    case false:
+    GarageModel.setHandler(interest, true);
     document.getElementById(button).innerHTML = "DISABLE " + button;
+    break;
   }
 }
 
@@ -465,7 +482,10 @@ function rangeValues(dataSource, interest){
   console.log(dataSource.value);
   var newValue = dataSource.value;
   console.log(newValue);
-  GarageModel[interest] = newValue;
+
+  GarageModel.setHandler(interest,newValue);
+
+  //GarageModel[interest] = newValue;
   console.log(GarageModel[dataSource]);
   console.log("range set!");
   document.getElementById("brightThing").innerHTML = GarageModel.getHandler('brightness');

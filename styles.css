@@ -167,7 +167,15 @@ width: 50%;
   text-shadow: 0.1vw 0.1vh 0.2vh #cc6600;
 }
 
-
+#loginViewButton:disabled{
+  background-color: #9d8062;
+}
+#advancedViewButton:disabled{
+  background-color: #9d8062;
+}
+#garageViewButton:disabled{
+  background-color: #9d8062;
+}
 /*
 Custom button wrapper for what are actually
 clickable links
