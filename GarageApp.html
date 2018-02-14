@@ -3,14 +3,11 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>DBI Garage</title>
+	<title>🤔DBI Garage🤔</title>
 	<link rel="stylesheet" href="styles.css">
 	<script src="./GarageApp.js"></script>
 	<script src="./GarageModel.js"></script>
 	<script src="./userInfo.js"></script>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-
 </head>
 
 
@@ -25,10 +22,16 @@
 		<img id="loadingIcon" class="overlayImage" src="./resources/pictures/gifs/loading.gif">
 	</div>
 
-<button id="something" class="sneakyButton"> DEBUG </button>
-<div class="debugHolder"> <p id ="debuggler"></p>
-<p id ="debuggler1"></p></div>
+	<button id="something" class="sneakyButton"> DEBUG </button>
+	<div class="debugHolder"> <p id ="debuggler"></p>
+		<p id ="debuggler1"></p>
+	</div>
 
+
+
+	<!-- *************** NAVPANEL *************** -->
+	<!-- *************** NAVPANEL *************** -->
+	<!-- *************** NAVPANEL *************** -->
 	<div id="headerPanel" class="NavPanel">
 		<div class="col span_1_of_3">
 			<button id="loginViewButton" class="testButton">
@@ -47,134 +50,127 @@
 		</div>
 	</div>
 
-	<!-- <h3>COPYRIGHT MASON HALL<h3>
-	<h3>DONUT STEAL >:( <h3> -->
+	<!-- *************** APPVIEW *************** -->
+	<!-- *************** APPVIEW *************** -->
+	<!-- *************** APPVIEW *************** -->
+
 	<div id="appZone">
 
+		<!-- *************** LOGIN *************** -->
+		<!-- *************** LOGIN *************** -->
+		<!-- *************** LOGIN *************** -->
 		<!-- FRESH N SPICEY LOGIN SCREEN -->
 		<section class= "testClassPleaseIgnore" id="loginTab">
 			<div class="page-content">
 
 				<div class="col span_1_of_3" id="login-Fields">
-					<input type="text" id="username" class="inputField" placeholder="Username?">
-					</input>
-					<input type="password" id="yourPassword" class="inputField" placeholder="Password?">
-					</input>
-		</div>
+					<input type="text" id="username" class="inputField" placeholder="Username?"></input>
+					<input type="password" id="yourPassword" class="inputField" placeholder="Password?"></input>
+				</div>
 
-		<div class="col span_1_of_3" id="login-Controls">
-			<button id="loginButton" class="testButton">
-				Login
-			</button>
-			<button id="newUserButton" class="testButton">
-				New User
-			</button>
-		</div>
+				<div class="col span_1_of_3" id="login-Controls">
+					<button id="loginButton" class="testButton">
+						Login
+					</button>
+					<button id="newUserButton" class="testButton">
+						New User
+					</button>
+				</div>
 
 
-		<!-- *** NEW ACCOUNT *** -->
+				<!-- *** NEW ACCOUNT *** -->
 
-		<div class="col span_3_of_3" id="newAccountSection">
-			<div class="col span_1_of_3" id="newUserFields">
-				<input type="text" id="chooseUsername" class="inputField" placeholder="Username?"></input><br>
-				<input type="email" id="yourEmail" class="inputField" placeholder="Valid Email"></input><br>
-				<input type="password" id="firstPassword" class="inputField" placeholder="Password?"></input><br>
-				<input type="password" id="secondPassword" class="inputField" placeholder="Confirm Password"></input><br>
+				<div class="col span_3_of_3" id="newAccountSection">
+					<div class="col span_1_of_3" id="newUserFields">
+						<input type="text" id="chooseUsername" class="inputField" placeholder="Username?"></input><br>
+						<input type="email" id="yourEmail" class="inputField" placeholder="Valid Email"></input><br>
+						<input type="password" id="firstPassword" class="inputField" placeholder="Password?"></input><br>
+						<input type="password" id="secondPassword" class="inputField" placeholder="Confirm Password"></input><br>
+					</div>
+					<div class="col span_1_of_3" id="newUserControls">
+						<button id="createAccountButton" class="testButton">
+							Create Account
+						</button>
+						<button id="returnToLogin" class="testButton">
+							Cancel <!--hide section when pushed-->
+						</button>
+					</div>
+				</div>
+
 			</div>
-			<div class="col span_1_of_3" id="newUserControls">
-				<button id="createAccountButton" class="testButton">
-					Create Account
-				</button>
-				<button id="returnToLogin" class="testButton">
-					Cancel <!--hide section when pushed-->
-				</button>
+		</section>
+
+		<!-- *************** USER INFO *************** -->
+		<!-- *************** USER INFO *************** -->
+		<!-- *************** USER INFO *************** -->
+		<section class="userInfoClass">
+			<div class="page-content" id="userInfo">
+				<div class="col span_3_of_3" id="userInfoStrings">
+					<h1> HEY ITS YOU NICE </h1><br>
+					<h1>THIS IS YOUR EMAIL MATE</h1>
+					<h1 id="theUser" class="label"></h1>
+					<h1 id="theEmail" class="label"></h1>
+					<button id="logoutButton" class="testButton">
+						LOGOUT
+					</button>
+				</div>
 			</div>
-		</div>
+		</section>
+
+		<!--  ************************** Garage Tab ************************** -->
+		<!--  ************************** Garage Tab ************************** -->
+		<!--  ************************** Garage Tab ************************** -->
+		<!--  ************************** Garage Tab ************************** -->
+		<section class= "garageView" id="garageTab">
+			<div class="page-content">
+
+				<div class="col span_1_of_3" id="garageControls">
+					<img id="myPicture" src="./resources/pictures/DoorOpenLight.png" style="width:40vw">
+					<img id="myAnimation" src="./resources/pictures/DoorOpenLight.png" style="width:40vw">
+				</div>
+
+				<div class="col span_1_of_3" id="lightCol">
+					<img id="switchPic" src="./resources/pictures/onSwitch.jpg" style="width: 20vw">
+					<img id="switchAnim" src="./resources/pictures/onSwitch.jpg" style="width: 20vw">
+					<button id="garageControlButton" class="testButton">CLOSE</button>
+				</div>
+			</div>
+		</section>
+
+
+
+		<!--  ************************** Advanced Tab ************************** -->
+		<!--  ************************** Advanced Tab ************************** -->
+		<!--  ************************** Advanced Tab ************************** -->
+		<!--  ************************** Advanced Tab ************************** -->
+
+		<section class= "advancedView" id="advancedTab">
+			<div class="col span_3_of_3" id="advanedTabControls">
+				<div class="col span_1_of_3" id="doorControls">
+					<h2> Door automatically closes after: </h2>
+					<input type="number" id="closeTimeout" class="inputField" placeholder="Seconds"></input><br>
+					<button id="autoClose" class="testButton">
+						ENABLE autoClose
+					</button>
+				</div>
+				<div class="col span_1_of_3" id="lightControls">
+					<h2> Light automatically shuts off after: </h2>
+					<input type="number" id="offTimeout" class="inputField" placeholder="Seconds"></input><br>
+					<button id="autoOff" class="testButton">
+						ENABLE autoOff
+					</button>
+				</div>
+				<div class="col span_1_of_3" id="lightBright">
+					<h2> Light Brightness: </h2>
+					<input type="range" min="1" max="100" value="50" class="mySlidey" id="mySlider"></input>
+					<label id="brightThing" placeholder="Current Brightness"></label>
+				</div>
+			</div>
+		</section>
+
+
+
 
 	</div>
-</section>
-<section class="userInfoClass"
-<div class="page-content" id="userInfo"
-<div class="col span_3_of_3" id="userInfoStrings">
-	<h1> HEY ITS YOU NICE </h1><br>
-	<h1>THIS IS YOUR EMAIL MATE</h1>
-	<h1 id="theUser" class="label"></h1>
-	<h1 id="theEmail" class="label"></h1>
-	<button id="logoutButton" class="testButton">
-		LOGOUT
-	</button>
-</div>
-</div>
-</section>
-
-<!--  ************************** Garage Tab ************************** -->
-
-<section class= "garageView" id="garageTab">
-	<div class="page-content">
-		<!-- <img id="myPicture" src="./resources/pictures/DoorOpenLight.png" style="width:40%">
-		<img id="myAnimation" src="./resources/pictures/DoorOpenLight.png" style="width:40%"> -->
-
-		<!-- <div class="col span_3_of_3" id="garageControls">
-		<img id="myPicture" src="./resources/pictures/DoorOpenLight.png" style="width:40%">
-		<img id="myAnimation" src="./resources/pictures/DoorOpenLight.png" style="width:40%">
-		<div class="col span_2_of_3" id="lightCol">
-		<img id="switchPic" src="./resources/pictures/onSwitch.jpg" style="width:30%">
-		<img id="switchAnim" src="./resources/pictures/onSwitch.jpg" style="width:30%">
-	</div>
-	<div class="col span_2_of_3" id="openControls">
-	<button id="debugButton" class="testButton">
-	OPEN / CLOSE
-</button>
-</div>
-</div> -->
-<div class="col span_1_of_3" id="garageControls">
-	<img id="myPicture" src="./resources/pictures/DoorOpenLight.png" style="width:40vw">
-	<img id="myAnimation" src="./resources/pictures/DoorOpenLight.png" style="width:40vw">
-</div>
-
-<div class="col span_1_of_3" id="lightCol">
-	<img id="switchPic" src="./resources/pictures/onSwitch.jpg" style="width: 20vw">
-	<img id="switchAnim" src="./resources/pictures/onSwitch.jpg" style="width: 20vw">
-	<button id="garageControlButton" class="testButton">CLOSE</button>
-</div>
-
-
-
-
-</div>
-</section>
-
-
-
-<!--  ************************** Advanced Tab ************************** -->
-
-<section class= "advancedView" id="advancedTab">
-	<div class="col span_3_of_3" id="advanedTabControls">
-		<div class="col span_1_of_3" id="doorControls">
-			<h2> Door automatically closes after: <h2>
-			<input type="number" id="closeTimeout" class="inputField" placeholder="Seconds"></input><br>
-			<button id="autoClose" class="testButton">
-				ENABLE autoClose
-			</button>
-		</div>
-		<div class="col span_1_of_3" id="lightControls">
-			<h2> Light automatically shuts off after: <h2>
-			<input type="number" id="offTimeout" class="inputField" placeholder="Seconds"></input><br>
-			<button id="autoOff" class="testButton">
-				ENABLE autoOff
-			</button>
-		</div>
-		<div class="col span_1_of_3" id="lightBright">
-			<h2> Light Brightness: <h2>
-			<input type="range" min="1" max="100" value="50" class="mySlidey" id="mySlider"></input>
-			<label id="brightThing" value="Current Brightness"></label>
-		</div>
-	</div>
-</section>
-
-
-
-
-</div>
 </body>
 </html>

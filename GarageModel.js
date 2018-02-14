@@ -15,7 +15,6 @@ var GarageModel = {
   light: true,
   currentPicSrc: "/resources/pictures/DoorOpenLight.png",
   //prevLight: false,
-
   opening: false,
   brightness: 5,
   autoCloseEnabled: false,
@@ -132,6 +131,20 @@ var GarageModel = {
     this.autoCloseEnabled = value;
   },
 
+  currentState: function(){
+    var stateMaybe = {
+    openState: this.openState,
+    open: this.open,
+    light: this.light,
+    opening: this.opening,
+    brightness: this.brightness,
+    autoCloseEnabled: this.autoCloseEnabled,
+    closeTimeDuration: this.closeTimeDuration,
+    offTimeDuration: this.offTimeDuration,
+    autoOffEnabled: this.autoOffEnabled,
+  }
+    return stateMaybe;
+  }
 }
 
 
