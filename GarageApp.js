@@ -506,8 +506,10 @@ function loading(nextFunction){
   document.getElementById('garageControlButton').disabled = true;
   console.log("loadingFunc");
   document.getElementById("loadingIcon").style.display = 'block';
-  GarageModel.setHandler("opening", true);
-  nextFunction();
+
+  //LOADING IS DONE FOR AN ADDITION SECOND BEFORE EXECUTION
+  setTimeout(function(){nextFunction();}, 1000);
+
   console.log("loading done");
 }
 
@@ -570,21 +572,25 @@ function rangeValues(dataSource, interest){
 
 
 
-
-function createMessage(str) {
-  var newMessage = document.createElement('li').innerHTML = str;
-  var list = document.getElementById("list");
-  list.insertBefore(newNode, list.childNodes[0]);
-}
-
+/////////////////////////////////CUSTOM DEBUG MODE/////////////////////////////////
+/////////////////////////////////CUSTOM DEBUG MODE/////////////////////////////////
+/////////////////////////////////CUSTOM DEBUG MODE/////////////////////////////////
+/////////////////////////////////CUSTOM DEBUG MODE/////////////////////////////////
+/////////////////////////////////CUSTOM DEBUG MODE/////////////////////////////////
+/////////////////////////////////CUSTOM DEBUG MODE/////////////////////////////////
 function isKeyPressed(event) {
     var x = document.getElementById("something");
     if (event.shiftKey) {
         console.log("DEBUG MODE ENABLED");
         document.getElementById("debuggler").style.display = "block";
         document.getElementById("debuggler1").style.display = "block";
-    } else {
+        document.getElementById("something").innerHTML = "HIDE";
+    }
+    else {
         console.log("The SHIFT key was NOT pressed!");
+        document.getElementById("debuggler").style.display = "none";
+        document.getElementById("debuggler1").style.display = "none";
+        document.getElementById("something").innerHTML = "DEBUG";
     }
 }
 
@@ -596,21 +602,30 @@ function consoleWrapper(string){
   console.log(string);
 }
 
-
+////////////////////////////////////ON LOADING////////////////////////////////////
+////////////////////////////////////ON LOADING////////////////////////////////////
+////////////////////////////////////ON LOADING////////////////////////////////////
+////////////////////////////////////ON LOADING////////////////////////////////////
+////////////////////////////////////ON LOADING////////////////////////////////////
 document.addEventListener("DOMContentLoaded", function(event) {
 
+////////////HIDE THINGS////////////
+////////////HIDE THINGS////////////
+////////////HIDE THINGS////////////
+////////////HIDE THINGS////////////
   document.getElementById("loadingIcon").display = 'none';
   document.getElementById("loadingIcon").style.display = 'none';
   document.getElementById("garageTab").style.display = 'none';
   document.getElementById("userInfo").style.display = 'none';
   document.getElementById("advancedTab").style.display = 'none';
-
-
   console.log("Document Loaded")
 
 
 
-  //NavPanel
+///////NAV PANEL///////
+///////NAV PANEL///////
+///////NAV PANEL///////
+///////NAV PANEL///////
   //Variables
   loginTab = document.getElementById("loginTab")
   garageTab = document.getElementById("garageTab")
@@ -633,7 +648,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
 
-  //Login Screen
+///////////Login Screen///////////
+///////////Login Screen///////////
+///////////Login Screen///////////
+///////////Login Screen///////////
+
   //Variables
   loginControls = document.getElementById("login-Controls")
   inputFields = document.getElementById("login-Fields")
@@ -648,13 +667,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
   document.getElementById("yourPassword").addEventListener("blur", passwordEntry)
   document.getElementById("yourPassword").addEventListener("click", passwordEntryStart)
   //document.getElementById("loginButton").addEventListener("click", garageScreen)
-
   document.getElementById("loginButton").addEventListener("click",  function(){loading(login);})
   document.getElementById("logoutButton").addEventListener("click", logout)
 
 
 
-  //New Account
+//////////////New Account//////////////
+//////////////New Account//////////////
+//////////////New Account//////////////
+//////////////New Account//////////////
+//////////////New Account//////////////
 
   //Variables
   newUser = document.getElementById("chooseUsername")
@@ -663,7 +685,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
   newEmail = document.getElementById("yourEmail")
   newAccount = document.getElementById("newAccount")
   newAccountSection = document.getElementById("newAccountSection")
-
   confirmAccountButton = document.getElementById("createAccountButton")
   cancelButton = document.getElementById("returnToLogin")
 
@@ -676,8 +697,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
   document.getElementById("returnToLogin").addEventListener("click", cancelUser)
 
 
-  //Garage Screen
-
+/////////////Garage Screen/////////////
+/////////////Garage Screen/////////////
+/////////////Garage Screen/////////////
+/////////////Garage Screen/////////////
+/////////////Garage Screen/////////////
   //Variables
   lightSwitch = document.getElementById("switchPic")
   myPicture = document.getElementById("myPicture")
@@ -688,7 +712,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
   document.getElementById("myAnimation").style.display = "none";
 
 
-  //ADVANCED SCREEN
+////////////////ADVANCED////////////////
+////////////////ADVANCED////////////////
+////////////////ADVANCED////////////////
+////////////////ADVANCED////////////////
+////////////////ADVANCED////////////////
 
   //variables
   autoClose = document.getElementById("autoClose")
@@ -707,16 +735,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
 
-  // // Getting the initial state
-  console.log("Getting Initial State")
-
-
+///HIDING THINFS BEFORE LAUNCHING///
   newAccountSection.style.visibility = "hidden";
-
   document.getElementById("switchAnim").style.display = 'none';
   document.getElementById("debuggler").style.display = 'none';
   document.getElementById("debuggler1").style.display = 'none';
 
+
+///NIIIIIIICE BUDDY///
   document.getElementById("something").addEventListener("click", isKeyPressed);
 
   //newAccountSection.display = none;
