@@ -36,7 +36,7 @@ h1 {
 }
 
 h2 {
-  font-size: 3.0vh;
+  font-size: 3.0vw;
 }
 
 p {
@@ -98,6 +98,12 @@ width: 50%;
 
 #newUserControls {
   margin:auto;
+}
+#garageControls, #lightCol{
+  margin: 5%;
+}
+#switchPic, #switchAnim, #myPicture, #myAnimation{
+  margin: 5%;
 }
 
 
@@ -189,7 +195,7 @@ clickable links
     background: #ff8000;
     border: 1px solid #000;
     box-sizing: inherit;
-    font-size: 2.0vw;
+    font-size: 3.0vw;
     box-shadow: 0.5vw 0.5vh 1vh #7a3d00;
 }
 
@@ -199,6 +205,10 @@ clickable links
   background-color: #cc6600;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
+}
+.testButton:disabled{
+  background-color: #9d8062;
+  /*text-decoration: line-through;*/
 }
 
 

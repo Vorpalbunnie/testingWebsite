@@ -277,10 +277,13 @@ function swapLightPic(picture){
   console.log("newLightPic");
   hideLoading();
 
+if(!GarageModel.opening){
   if(GarageModel.light && GarageModel.autoOffEnabled){
       console.log("Light On AND Auto Off Enabled!");
-      startTimer('offTime');
+      startTimer('offTimeDuration');
   }
+}
+
 }
 function updateGarageLight(callback){
   console.log("update Light");
@@ -362,7 +365,7 @@ function swapGaragePic(picture){
 
   if(GarageModel.open && GarageModel.autoCloseEnabled){
       console.log("Door Open and Auto Close Enabled!");
-        startTimer(closeTime);
+        startTimer('closeTimeDuration');
   }
 }
 
@@ -371,24 +374,23 @@ function swapGaragePic(picture){
 //but not when i print it manually....T-T
 function startTimer(object){
   //this works!
-
-  var timeValue = GarageModel[object];
+  var timeValue = GarageModel.getHandler(object);
   console.log(timeValue);
-  setTimeout(function(){shutOff(object);}, this.timeValue);
+  setTimeout(function(){shutOff(object);}, timeValue);
 }
 
 
 function shutOff(object){
-  console.log("TURN OFF");
+  console.log("SHUT OFF");
   console.log(object);
   switch (object){
-    case "offTime":
+    case "offTimeDuration":
     console.log("switch statement offTime");
     if(GarageModel.light){
       lightChangeHandler('buttonClick');
     }
     break;
-    case "closeTime":
+    case "closeTimeDuration":
     console.log("switch statement closeTime");
     loading(updateDoor);
     break;
@@ -411,11 +413,13 @@ function loading(nextFunction){
   document.getElementById('garageControlButton').disabled = true;
   console.log("loadingFunc");
   document.getElementById("loadingIcon").style.display = 'block';
+  GarageModel.opening = true;
   nextFunction();
   console.log("loading done");
 }
 
 function hideLoading(){
+  GarageModel.opening = false;
   document.getElementById('garageControlButton').disabled = false;
   console.log("hideLoading");
   document.getElementById("loadingIcon").style.display = 'none';
@@ -446,22 +450,25 @@ var brightness
 
 
 //FUNctions!
-function boolChecker(interest){
+function boolChecker(button,interest){
   console.log(GarageModel[interest]);
   if(GarageModel[interest]){
     GarageModel[interest] = false;
+    document.getElementById(button).innerHTML = "ENABLE" + button;
   } else {
     GarageModel[interest] = true;
+    document.getElementById(button).innerHTML = "DISABLE " + button;
   }
 }
 
-function rangeValues(dataSource){
+function rangeValues(dataSource, interest){
   console.log(dataSource.value);
   var newValue = dataSource.value;
   console.log(newValue);
-  GarageModel[dataSource] = newValue;
+  GarageModel[interest] = newValue;
   console.log(GarageModel[dataSource]);
   console.log("range set!");
+  document.getElementById("brightThing").innerHTML = GarageModel.getHandler('brightness');
 }
 
 
@@ -572,12 +579,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
   brightness = document.getElementById("mySlider")
 
   //listeners
-  document.getElementById("autoClose").addEventListener("click", function(){boolChecker("autoCloseEnabled");})
-  document.getElementById("autoOff").addEventListener("click", function(){boolChecker("autoOffEnabled");})
+  document.getElementById("autoClose").addEventListener("click", function(){boolChecker("autoClose","autoCloseEnabled");})
+  document.getElementById("autoOff").addEventListener("click", function(){boolChecker("autoOff","autoOffEnabled");})
 
-  document.getElementById("closeTimeout").addEventListener("change", function(){rangeValues(closeTime);})
-  document.getElementById("offTimeout").addEventListener("change", function(){rangeValues(offTime);})
-  document.getElementById("mySlider").addEventListener("change", function(){rangeValues(brightness);})
+  document.getElementById("closeTimeout").addEventListener("change", function(){rangeValues(closeTime, 'closeTimeDuration');})
+  document.getElementById("offTimeout").addEventListener("change", function(){rangeValues(offTime, 'offTimeDuration');})
+  document.getElementById("mySlider").addEventListener("change", function(){rangeValues(brightness, 'brightness');})
 
 
 

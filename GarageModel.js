@@ -19,10 +19,37 @@ var GarageModel = {
   opening: false,
   brightness: 5,
   autoCloseEnabled: false,
-  closeTime: 0,
-  offTime: 0,
+  closeTimeDuration: 0,
+  offTimeDuration: 0,
   autoOffEnabled: false,
   stateChangeListener: true,
+
+  getHandler: function(desired){
+    switch(desired){
+      case 'offTimeDuration':
+      return this.getoffTimeDuration();
+      break;
+      case 'closeTimeDuration':
+      return this.getCloseTimeDuration();
+      break;
+      case 'brightness':
+      return this.getBrightness();
+
+    }
+
+  },
+
+  getoffTimeDuration: function(){
+    return this.offTimeDuration;
+  },
+
+  getCloseTimeDuration: function(){
+    return this.closeTimeDuration;
+  },
+
+  getBrightness: function(){
+    return this.brightness;
+  },
 
   stateChange: function(callback) {
       var callingObject = this;
