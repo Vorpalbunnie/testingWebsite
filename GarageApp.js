@@ -294,8 +294,8 @@ var states = [
 var onOff = "./resources/pictures/gifs/onOff.gif"
 var offOn = "./resources/pictures/gifs/offOn.gif"
 
-var on = "./resources/pictures/OnSwitch.jpg"
-var off = "./resources/pictures/OffSwitch.jpg"
+var on = "./resources/pictures/OnSwitch.png"
+var off = "./resources/pictures/OffSwitch.png"
 
 
 //update this after garage model or vise versa :)
