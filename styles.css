@@ -301,3 +301,7 @@ clickable links
   pointer-events: none;
   opacity: 0.4;
 }
+#linkButton{
+	box-shadow: 0.1vw 0.1vh 0.5vh #7a3d00;
+	background: #ff8000;
+}
