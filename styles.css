@@ -302,6 +302,12 @@ clickable links
   opacity: 0.4;
 }
 #linkButton{
-	box-shadow: 0.1vw 0.1vh 0.5vh #7a3d00;
-	background: #D3D3D3;
+    box-shadow: 0.1vw 0.1vh 0.5vh darkgrey;
+    background: #D3D3D3;
+    padding: 1.5%;
+    border-radius: 5px;
+    border: 1px solid #000;
+    /* margin: auto; */
+    box-sizing: border-box;
+    display: block;
 }
